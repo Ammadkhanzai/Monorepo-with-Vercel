@@ -4,10 +4,6 @@
   "description": "Fileinstant Backend API",
   "main": "server.js",
   "scripts": {
-    "just-build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "install-server": "npm install",
-    "vercel-build": "npm run install-client && npm run install-server && npm run just-build ",
     "start": "node server.js",
     "client": "cd client && npm start",
     "dev": "nodemon server"
