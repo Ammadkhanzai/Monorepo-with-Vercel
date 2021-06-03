@@ -3,3 +3,4 @@ config/config.env
 
 # Admin panel
 admin/node_modules
+.vercel
