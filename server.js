@@ -12,11 +12,11 @@ const path = require('path');
 
 
 const app = express();
-const corsOptions = {
-  credentials: true,
-  origin: "https://fileinstant.herokuapp.com/"
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   credentials: true,
+//   origin: "https://fileinstant.herokuapp.com/"
+// };
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
@@ -69,6 +69,15 @@ app.use((error, req, res, next) => {
 //     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 //   });
 // }
+
+
+  const path = require('path')
+
+  app.get('/',(req,res)=>{
+      app.use(express.static(path.resolve(__dirname,'client','build')))
+      res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+  })
+
 
 //App listener
 const port = process.env.PORT || 8080;
