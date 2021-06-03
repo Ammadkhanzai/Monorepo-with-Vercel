@@ -62,13 +62,13 @@ app.use((error, req, res, next) => {
   });
 })
 
-// Production setup
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-}
+// // Production setup
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, 'client/build')));
+//   app.get('/*', function (req, res) {
+//     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+//   });
+// }
 
 //App listener
 const port = process.env.PORT || 8080;
