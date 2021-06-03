@@ -3,14 +3,10 @@
   "version": "1.0.0",
   "description": "Fileinstant Backend API",
   "main": "server.js",
+  "proxy": "http://localhost:5000/",
   "scripts": {
-    "just-build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "install-server": "npm install",
-    "vercel-build": "npm run install-client && npm run install-server && npm run just-build ",
-    "start": "node server.js",
-    "client": "cd client && npm start",
-    "dev": "nodemon server"
+    "start": "node server.js"
+    
   },
   "engines": {
     "node": "14.16.0",
