@@ -1,31 +1,20 @@
-// Load .env vars
-require('dotenv').config();
-// require('dotenv').config({ path: "./config/config.env" });
-
 const express = require("express");
+const dotenv = require("dotenv");
 const cors = require('cors');
+const morgan = require("morgan");
+const colors = require("colors");
 const connectDB = require("./config/db");
 const auth = require('./middleware/auth.js');
 const cookieParser = require('cookie-parser')
-const jwt = require("jsonwebtoken");
-const path = require('path');
+const path = require("path")
+const fs = require("fs")
 
 
-const app = express();
-// const corsOptions = {
-//   credentials: true,
-//   origin: "https://fileinstant.herokuapp.com/"
-// };
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser())
-app.use('/uploads', express.static('uploads'));
-
+// Load .env vars
+dotenv.config({ path: "./config/config.env" });
 
 // Connect to database
 connectDB();
-
 
 
 
@@ -39,6 +28,30 @@ const populorSoftwareRouter = require('./routes/populor-software.js');
 const infoPageRouter = require('./routes/info-page.js');
 const statisticRouter = require('./routes/statistic.js');
 const sendmail = require('./routes/sendmail.js');
+
+
+const app = express();
+
+// Body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use( '/uploads',express.static('uploads'));
+
+// const corsOptions = {
+//   credentials: true,
+//   origin: "http://localhost:3000"
+// };
+
+app.use(cors());
+app.use(cookieParser())
+
+
+// Dev logging middleware
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
+
 
 // Routing URLS
 app.use("/api/login", loginRoute);
@@ -71,7 +84,7 @@ app.use((error, req, res, next) => {
 // }
 
 
-  const path = require('path')
+  
 
   app.get('/',(req,res)=>{
       app.use(express.static(path.resolve(__dirname,'client','build')))

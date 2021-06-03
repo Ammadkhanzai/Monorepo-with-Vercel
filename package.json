@@ -4,9 +4,7 @@
   "description": "Fileinstant Backend API",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "client": "cd client && npm start",
-    "dev": "nodemon server"
+    "start": "node server.js"
   },
   "engines": {
     "node": "14.16.0",
