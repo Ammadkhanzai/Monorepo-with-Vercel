@@ -1,42 +1,23 @@
 {
-  "name": "fileinstant",
+  "name": "fileinstant-vercel",
   "version": "1.0.0",
-  "description": "Fileinstant Backend API",
-  "main": "/api/server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node /api/server.js"
-  },
-  "engines": {
-    "node": "14.16.0",
-    "npm": "6.14.11"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alykhan2212/fileinstant.git"
+    "url": "git+https://github.com/Ammadkhanzai/fileinstant-vercel.git"
   },
-  "author": "Nexecube",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alykhan2212/fileinstant/issues"
+    "url": "https://github.com/Ammadkhanzai/fileinstant-vercel/issues"
   },
-  "homepage": "https://github.com/alykhan2212/fileinstant#readme",
+  "homepage": "https://github.com/Ammadkhanzai/fileinstant-vercel#readme",
   "dependencies": {
-    "axios": "^0.21.1",
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "formik": "^2.2.6",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.15",
-    "multer": "^1.4.2",
-    "path": "^0.12.7",
-    "yup": "^0.32.9",
-    "nodemailer": "^6.6.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
+    "express": "^4.17.1"
   }
 }
