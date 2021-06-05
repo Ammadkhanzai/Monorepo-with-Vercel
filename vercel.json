@@ -3,7 +3,7 @@
     "redirects": [
         
       { "source": "/a/(.*)", "destination": "/client/" },
-      { "source": "/my/api/(.*)", "destination": "/admin/build/$1" }
+      { "source": "/my/api/(.*)", "destination": "/$1" }
         
     ]
   }
