@@ -2,6 +2,6 @@
     "version": 2,
     "redirects": [
       { "source": "/client/(.*)", "destination": "/client/(.*)" },
-      { "source": "/(.*)", "destination": "/" }
+      { "source": "/admin/(.*)", "destination": "/admin/(.*)" }
     ]
   }
