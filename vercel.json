@@ -1,0 +1,7 @@
+{
+    "version": 2,
+    "redirects": [
+      { "source": "/a/(.*)", "destination": "/client/" },
+      { "source": "/b/(.*)", "destination": "/admin/build/index.js" }
+    ]
+  }
