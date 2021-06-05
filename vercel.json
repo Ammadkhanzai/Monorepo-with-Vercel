@@ -1,6 +1,9 @@
 {
     "version": 2,
     "redirects": [
-        { "source": "/test/(.*)", "destination": "admin/build/index.js" }
+        
+      { "source": "/a/(.*)", "destination": "/client/" },
+      { "source": "/admin/(.*)", "destination": "/" },
+        
     ]
   }
