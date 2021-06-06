@@ -69,7 +69,7 @@ export async function getServerSideProps(context) {
     let flag;
     
     const software = async ()=>{
-        const response = axios.get(`http://localhost:5000/api/${context.params.category}`)
+        const response = axios.get(`${process.env.REACT_APP_API_URL}/api/${context.params.category}`)
         .then(response => {
             flag = false;
             return { code : 200 , response : response.data.data }
@@ -81,9 +81,9 @@ export async function getServerSideProps(context) {
     }
 
     const softwareByCategory = async ()=>{
-        const response = axios.get(`http://localhost:5000/api/category/single/${context.params.category}`)
+        const response = axios.get(`${process.env.REACT_APP_API_URL}/api/category/single/${context.params.category}`)
         .then(response => {
-           return axios.get(`http://localhost:5000/api/software-management/${response.data.data[0]._id}/`)
+           return axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/${response.data.data[0]._id}/`)
             .then(response => {
                 flag = true;
                 return { code : 200 , response : response.data.data }

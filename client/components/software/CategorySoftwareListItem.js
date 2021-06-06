@@ -4,7 +4,7 @@ const Softwares = ({ item }) => {
 
   return (
     <div className="category_downloads_item" >
-        <img src={`http://localhost:5000/uploads/${item.icon}`} alt="icon" />
+        <img src={`${process.env.REACT_APP_API_URL}/uploads/${item.icon}`} alt="icon" />
         <div>
             <h5> 
             <Link href={ `/download/${item.name.trim().split(" ").join("-").toLowerCase()}/${item.key}`} >
