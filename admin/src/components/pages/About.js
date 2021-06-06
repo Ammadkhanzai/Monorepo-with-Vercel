@@ -6,7 +6,7 @@ import Navbar from "../layout/navbar/Navbar";
 
 const About = () => {
   let match = useRouteMatch();
-  console.log(match.url)
+  console.log(match)
 
 
   const [info, setInfo] = useState([])

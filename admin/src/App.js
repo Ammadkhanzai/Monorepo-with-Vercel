@@ -92,7 +92,8 @@ function App() {
               />
               <Route exact path="/tech-news" component={TechNews} />
               <Route exact path="/tech-news/:newsitle" component={LatestNews} />
-              <Route exact path="/about" component={About} />
+              <Route exact path="https://fileinstant-vercel.vercel.app/about" component={About} />
+              <Route exact path="https://proxy-omega.vercel.app/frontend/about" component={About} />
               <Route exact path="/contact" component={Contact} />
 
               {/* ADMIN PANEL ROUTES */}
