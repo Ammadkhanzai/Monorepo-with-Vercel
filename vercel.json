@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+      {
+        "source": "/admin/:match*",
+        "destination": "https://fileinstant-vercel.vercel.app/admin/:match*"
+      },
+      {
+        "source": "/:match*",
+        "destination": "fileinstant-vercels.vercel.app/:match*"
+      }
+    ]
+  }
