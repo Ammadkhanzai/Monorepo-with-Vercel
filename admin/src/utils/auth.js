@@ -18,7 +18,7 @@ export default function useAuth() {
 
     //set user
     const setUserContext = async () => {
-        return await axios.post('http://localhost:5000/login').then(res => {
+        return await axios.post('${process.env.REACT_APP_API_URL}/login').then(res => {
             console.log(res)
             // setUser(res.data.currentUser);
             // history.push('/home');
@@ -31,7 +31,7 @@ export default function useAuth() {
     //login user 
     const loginUser = async (data) => {
         const { email, password } = data;
-        return axios.post('http://localhost:5000/login', {
+        return axios.post('${process.env.REACT_APP_API_URL}/login', {
             email,
             password,
         }).then(async () => {
