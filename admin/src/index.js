@@ -10,8 +10,10 @@ import App from "./App";
 // );
 
 ReactDOM.render(
-  
-    <App />
-  ,
+    <div>
+      <h2>this is 2nd test</h2>
+      <App />
+    </div>
+  , 
   document.getElementById("root")
 );
