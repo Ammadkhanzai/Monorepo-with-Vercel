@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route   } from "react-router-dom";
+import {  useRouteMatch } from "react-router-dom";
 import PrivateRoute from './admin/components/user/PrivateRoute';
 import PublicRoute from './admin/components/user/PublicRoute';
 import { useState , useEffect } from 'react';
@@ -77,6 +78,7 @@ function App() {
           
             <Switch>
               {/* APP ROUTES  */}
+
               <Route exact path="/" component={Home} />
               <Route exact path="/widget" component={Widget} />
               <Route exact path="/download/:title/:id" component={Download} />
@@ -92,8 +94,8 @@ function App() {
               />
               <Route exact path="/tech-news" component={TechNews} />
               <Route exact path="/tech-news/:newsitle" component={LatestNews} />
-              <Route exact path="https://fileinstant-vercel.vercel.app/about" component={About} />
-              <Route exact path="https://proxy-omega.vercel.app/frontend/about" component={About} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/:a" component={About} />
               <Route exact path="/contact" component={Contact} />
 
               {/* ADMIN PANEL ROUTES */}

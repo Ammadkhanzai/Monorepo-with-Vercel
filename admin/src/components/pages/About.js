@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import {  useRouteMatch } from "react-router-dom";
+
 import axios from 'axios';
 import Footer from "../layout/footer/Footer";
 import Navbar from "../layout/navbar/Navbar";
 
 const About = () => {
-  let match = useRouteMatch();
-  console.log(match)
+  
 
 
   const [info, setInfo] = useState([])
