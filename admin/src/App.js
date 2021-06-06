@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route  } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route   } from "react-router-dom";
 import PrivateRoute from './admin/components/user/PrivateRoute';
 import PublicRoute from './admin/components/user/PublicRoute';
 import { useState , useEffect } from 'react';
