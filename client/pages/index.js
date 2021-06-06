@@ -128,7 +128,7 @@ export default function Home({ categories , softwares , popularSoftwares , lates
 export async function getServerSideProps(context) {
 
   const category = async ()=>{
-    const response = await axios.get('http://localhost:5000/api/category')
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/category`)
       .then(response => {
         if(response.data.success) return { code : 200 , response : response.data.data }
         return { code : 404 , response : "Not Found" }
@@ -145,7 +145,7 @@ export async function getServerSideProps(context) {
     for (let i = 0; i < nodes.length; i++) {
         const id =  Object.values(categories[i])[0]
         const title =  Object.values(categories[i])[1]
-        await axios.get(`http://localhost:5000/api/software-management/${id}/${5}` )
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/${id}/${5}` )
         .then(response => {          
           if(response.data.data.length){
             softwares.push({softwares: response.data.data , categoryID : id , title : title   })
@@ -159,7 +159,7 @@ export async function getServerSideProps(context) {
   }
 
   const popularSoftware = async () => {
-    const response = await axios.get(`http://localhost:5000/api/popular-software/5`)
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/popular-software/5`)
     .then((response) => {
       return { code : 200 , response : response.data.data }
     })
@@ -170,7 +170,7 @@ export async function getServerSideProps(context) {
   }
       
   const latestSoftware = async () => {
-    const response = await axios.get(`http://localhost:5000/api/latest-software/5`)
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/5`)
     .then((response) => {
       return { code : 200 , response : response.data.data }
     })

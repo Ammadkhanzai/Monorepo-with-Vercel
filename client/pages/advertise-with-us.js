@@ -156,7 +156,7 @@ export default function index() {
 
 // export async function getStaticProps(context) {
 
-//   const info = await axios.get(`http://localhost:5000/api/info-page`)
+//   const info = await axios.get(`${process.env.REACT_APP_API_URL}/api/info-page`)
 //   .then((response) => {
 //     return { code : 200 , response : response.data.data }
 //   })

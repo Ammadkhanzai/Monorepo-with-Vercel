@@ -31,7 +31,7 @@ export default  function  index({software, oldSoftware}){
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <meta  property="og:title" content={software.response.softwareName} />
                 <meta  property="og:description" content={software.response.softwareDescription}  />
-                <meta  property="og:image" content={`http://localhost:5000/uploads/${software.response.softwareScreenshot[0]}`} />
+                <meta  property="og:image" content={`${process.env.REACT_APP_API_URL}/uploads/${software.response.softwareScreenshot[0]}`} />
               </Head> 
               <DownloadContent software={software} oldSoftware={oldSoftware} />
             </div>
@@ -45,7 +45,7 @@ export default  function  index({software, oldSoftware}){
 
 export async function getStaticPaths() {
 
-  const software = await axios.get('http://localhost:5000/api/software-management/')
+  const software = await axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/`)
   .then((response) => {
     return { code : 200 , response : response.data.data }
   })
@@ -78,7 +78,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   
-  const software = await axios.get('http://localhost:5000/api/software-management/fetch/',{ params : { id : context.params.params[1] }})
+  const software = await axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/fetch/`,{ params : { id : context.params.params[1] }})
   .then(response => {
     return { code : 200 , response : response.data.data }
   })
@@ -86,7 +86,7 @@ export async function getStaticProps(context) {
     return { code : 404 , response : error }
   })
 
-  const oldSoftware = await axios.get(`http://localhost:5000/api/software-management/fetch/${software.response.softwareName}`)
+  const oldSoftware = await axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/fetch/${software.response.softwareName}`)
   .then(response => {
     return { code : 200 , response : response.data.data }
   })

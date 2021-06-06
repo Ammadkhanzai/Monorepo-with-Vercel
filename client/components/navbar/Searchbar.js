@@ -16,7 +16,7 @@ const Searchbar = () => {
     setData([])
     const cancelTokenSource = axios.CancelToken.source()
     if(search === null || search.search === "" || search.search === " " ) return;
-    axios.get(`http://localhost:5000/api/software-management/search/${search.search}`, { cancelToken: cancelTokenSource.token })
+    axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/search/${search.search}`, { cancelToken: cancelTokenSource.token })
       .then(response => {
         console.log(response)
         setData(response.data.data)

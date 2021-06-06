@@ -20,7 +20,7 @@ const LatestSofts = ({ data , title , link  }) => {
               
               <li key={key}>
                 <img
-                  src={`http://localhost:5000/uploads/${index.softwareID.softwareIcon}`}
+                  src={`${process.env.REACT_APP_API_URL}/uploads/${index.softwareID.softwareIcon}`}
                   alt=""
                   className="img-fluid"
                 />

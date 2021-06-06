@@ -52,7 +52,7 @@ const DownloadContent = ({software, oldSoftware}) => {
     
       <div className="row mb-4">
         <div className="download_title">
-          <img src={`http://localhost:5000/uploads/${software.response.softwareIcon}`} alt="" />
+          <img src={`${process.env.REACT_APP_API_URL}/uploads/${software.response.softwareIcon}`} alt="" />
           <div className="download_title_desc">
             <h5>{software.response.softwareName}</h5>
             <p>
