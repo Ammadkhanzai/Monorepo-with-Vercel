@@ -43,116 +43,118 @@ import { getToken, removeUserSession, setUserSession } from './utils/common';
 
 function App() {
   
-  const [authLoading, setAuthLoading] = useState(true);
+  // const [authLoading, setAuthLoading] = useState(true);
 
-  useEffect(() => {
-    const token = getToken();
-    if (!token) {
-      return;
-    }
-    const cancelTokenSource = axios.CancelToken.source();
-    axios.get(`http://localhost:5000/api/login/verifyToken/`,{ 
-        cancelToken: cancelTokenSource.token,
-        headers: {
-          'AuthorizationToken': token
-        }
-    }).then(response => {
-      setUserSession(response.data.Token, response.data.user);
-      setAuthLoading(false);
-    }).catch(error => {
-      removeUserSession();
-      setAuthLoading(false);
-    });
-    return () => cancelTokenSource.cancel("Operation canceled by the user.");
-  }, []);
+  // useEffect(() => {
+  //   const token = getToken();
+  //   if (!token) {
+  //     return;
+  //   }
+  //   const cancelTokenSource = axios.CancelToken.source();
+  //   axios.get(`http://localhost:5000/api/login/verifyToken/`,{ 
+  //       cancelToken: cancelTokenSource.token,
+  //       headers: {
+  //         'AuthorizationToken': token
+  //       }
+  //   }).then(response => {
+  //     setUserSession(response.data.Token, response.data.user);
+  //     setAuthLoading(false);
+  //   }).catch(error => {
+  //     removeUserSession();
+  //     setAuthLoading(false);
+  //   });
+  //   return () => cancelTokenSource.cancel("Operation canceled by the user.");
+  // }, []);
 
-  if (authLoading && getToken()) {
-    return <div className="content">Checking Authentication...</div>
-  }
+  // if (authLoading && getToken()) {
+  //   return <div className="content">Checking Authentication...</div>
+  // }
   
-  
-  return (
-    <WidgetState>
-      <Router>
-        <div className="App">
+  return(
+  <h1>hello</h1>
+  )
+  // return (
+  //   <WidgetState>
+  //     <Router>
+  //       <div className="App">
           
-            <Switch>
-              {/* APP ROUTES  */}
+  //           <Switch>
+  //             {/* APP ROUTES  */}
 
-              <Route exact path="/" component={Home} />
-              <Route exact path="/widget" component={Widget} />
-              <Route exact path="/download/:title/:id" component={Download} />
-              <Route exact path="/download/wait/:id" component={DownloadWait} />
-              <Route exact path="/softwares/latest-software" component={DownloadList} />
-              <Route exact path="/softwares/popular-software" component={DownloadList} />
-              <Route exact path="/softwares/:category" component={CategorySoftware} />
-              {/* <Route exact path="/latest-softwares/" component={DownloadList} /> */}
-              <Route
-                exact
-                path="/advertise-with-us"
-                component={AdvertiseWithUs}
-              />
-              <Route exact path="/tech-news" component={TechNews} />
-              <Route exact path="/tech-news/:newsitle" component={LatestNews} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/:a" component={About} />
-              <Route exact path="/contact" component={Contact} />
+  //             <Route exact path="/" component={Home} />
+  //             <Route exact path="/widget" component={Widget} />
+  //             <Route exact path="/download/:title/:id" component={Download} />
+  //             <Route exact path="/download/wait/:id" component={DownloadWait} />
+  //             <Route exact path="/softwares/latest-software" component={DownloadList} />
+  //             <Route exact path="/softwares/popular-software" component={DownloadList} />
+  //             <Route exact path="/softwares/:category" component={CategorySoftware} />
+  //             {/* <Route exact path="/latest-softwares/" component={DownloadList} /> */}
+  //             <Route
+  //               exact
+  //               path="/advertise-with-us"
+  //               component={AdvertiseWithUs}
+  //             />
+  //             <Route exact path="/tech-news" component={TechNews} />
+  //             <Route exact path="/tech-news/:newsitle" component={LatestNews} />
+  //             <Route exact path="/about" component={About} />
+  //             <Route exact path="/:a" component={About} />
+  //             <Route exact path="/contact" component={Contact} />
 
-              {/* ADMIN PANEL ROUTES */}
-              <PublicRoute exact path="/admin/admin-login" component={Login} />
-              <PrivateRoute
-                exact
-                path="/admin"
-                component={() => (window.location.href = "/admin/dashboard")}
-              />
-              <PrivateRoute exact path="/admin/dashboard" component={Dashboard} />
-              <PrivateRoute
-                exact
-                path="/admin/home-management"
-                component={HomeManagement}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/softwares-categories"
-                component={SoftwaresCategories}
-              />
-              <PrivateRoute path="/admin/softwares-categories/edit/:id" exact component={SoftwaresCategories} />
-              <PrivateRoute
-                exact
-                path="/admin/softwares-management"
-                component={SoftwaresManagement}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/softwares-management/edit/:id"
-                component={SoftwaresManagement}
-              />
-              <PrivateRoute exact path="/admin/info-pages" component={InfoPages} />
-              <PrivateRoute
-                exact
-                path="/admin/detail-statics"
-                component={DetailStatics}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/staff-management"
-                component={StaffManagement}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/staff-management/edit/:id"
-                component={StaffManagement}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/alerts-and-notifications"
-                component={AlertsAndNotifications}
-              />
-            </Switch>
-        </div>
-      </Router>
-    </WidgetState>
-  );
+  //             {/* ADMIN PANEL ROUTES */}
+  //             <PublicRoute exact path="/admin/admin-login" component={Login} />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin"
+  //               component={() => (window.location.href = "/admin/dashboard")}
+  //             />
+  //             <PrivateRoute exact path="/admin/dashboard" component={Dashboard} />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin/home-management"
+  //               component={HomeManagement}
+  //             />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin/softwares-categories"
+  //               component={SoftwaresCategories}
+  //             />
+  //             <PrivateRoute path="/admin/softwares-categories/edit/:id" exact component={SoftwaresCategories} />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin/softwares-management"
+  //               component={SoftwaresManagement}
+  //             />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin/softwares-management/edit/:id"
+  //               component={SoftwaresManagement}
+  //             />
+  //             <PrivateRoute exact path="/admin/info-pages" component={InfoPages} />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin/detail-statics"
+  //               component={DetailStatics}
+  //             />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin/staff-management"
+  //               component={StaffManagement}
+  //             />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin/staff-management/edit/:id"
+  //               component={StaffManagement}
+  //             />
+  //             <PrivateRoute
+  //               exact
+  //               path="/admin/alerts-and-notifications"
+  //               component={AlertsAndNotifications}
+  //             />
+  //           </Switch>
+  //       </div>
+  //     </Router>
+  //   </WidgetState>
+  // );
 }
 
 export default App;
