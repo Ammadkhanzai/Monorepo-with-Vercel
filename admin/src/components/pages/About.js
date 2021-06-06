@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-
 import axios from 'axios';
 import Footer from "../layout/footer/Footer";
 import Navbar from "../layout/navbar/Navbar";
 
 const About = () => {
-  
-
 
   const [info, setInfo] = useState([])
 
