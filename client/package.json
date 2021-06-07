@@ -10,8 +10,8 @@
   "dependencies": {
     "@badrap/bar-of-progress": "^0.1.2",
     "axios": "^0.21.1",
-    "bootstrap": "^5.0.0-beta3",
     "chart.js": "^2.9.4",
+    "bootstrap": "^5.0.1",
     "disqus-react": "^1.0.11",
     "next": "10.2.3",
     "react": "17.0.2",

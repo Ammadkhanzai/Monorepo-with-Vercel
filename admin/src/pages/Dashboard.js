@@ -64,7 +64,7 @@ const Dashboard = () => {
           <Col lg={2} className="p-0">
             <Sidebar activeClass="sidePanelActive" />
           </Col>
-          <Col lg={10} className="p-0">
+          <Col lg={10}  className="p-0">
             <Navbar navTitle="Dashboard" />
             <div id="admin_dashboard">
               <div className="row mb-5">
