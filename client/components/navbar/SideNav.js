@@ -9,14 +9,12 @@ const SideNav = ({ cName, toggleSidebar }) => {
     <div className={cName}>
      <ul>
         {NavbarData.map((data, index) => (
-          <li key={index} onClick={toggleSidebar}>
-            <Link href={data.path}>
-              <>
+          <Link key={index} href={data.path}>
+          <li onClick={toggleSidebar}>
               {data.icon}
               {data.title}
-              </ >
-            </Link>
           </li>
+          </Link>
         ))}
       </ul>
     </div>
