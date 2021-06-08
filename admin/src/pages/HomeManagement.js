@@ -71,7 +71,7 @@ const HomeManagement = () => {
           </Col>
           <Col lg={10} className="p-0">
             <Navbar navTitle="Home Management" />
-            <div id="admin_home_management">
+            <div id="admin_home_management" className="_min">
               <div className="row">
                 <LatestSoftwares/>
               </div>

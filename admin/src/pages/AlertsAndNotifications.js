@@ -66,7 +66,7 @@ const DetailStatics = () => {
           </Col>
           <Col lg={10} className="p-0">
             <Navbar navTitle="Alerts And Notification" />
-            <div id="admin_alerts_and_notifications">
+            <div id="admin_alerts_and_notifications" className="_min">
               <h3>Alerts And Notifications</h3>
             </div>
           </Col>

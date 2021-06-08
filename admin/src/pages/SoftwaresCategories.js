@@ -66,7 +66,7 @@ const SoftwareCategories = () => {
           </Col>
           <Col lg={10} className="p-0">
             <Navbar navTitle="Software Categories" />
-            <div id="admin_softwares_categories">
+            <div id="admin_softwares_categories" className="_min">
               <div className="row mb-5">
                 <Categories />
               </div>

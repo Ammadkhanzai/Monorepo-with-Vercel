@@ -64,7 +64,7 @@ const DetailStatics = () => {
           </Col>
           <Col lg={10} className="p-0">
             <Navbar navTitle="Staff Management" />
-            <div id="admin_detail_statics">
+            <div id="admin_detail_statics" className="_min">
               <h3>Detail Statics</h3>
             </div>
           </Col>

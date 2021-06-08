@@ -66,7 +66,7 @@ const Dashboard = () => {
           </Col>
           <Col lg={10}  className="p-0">
             <Navbar navTitle="Dashboard" />
-            <div id="admin_dashboard">
+            <div id="admin_dashboard" className="_min">
               <div className="row mb-5">
                 <LineChart />
               </div>

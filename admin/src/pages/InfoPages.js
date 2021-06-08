@@ -129,7 +129,7 @@ const Infopages = () => {
           </Col>
           <Col lg={10} className="p-0">
             <Navbar navTitle="Info Pages" />
-            <div id="admin_info_pages">
+            <div id="admin_info_pages" className="_min">
               {/* <h3>Info Pages</h3>  */}
               <Form onSubmit={ FormHandler } >
                 <Row className="my-2">

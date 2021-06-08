@@ -66,7 +66,7 @@ return (
           </Col>
           <Col lg={10} className="p-0">
             <Navbar navTitle="Software Management" />
-            <div id="admin_softwares_management">
+            <div id="admin_softwares_management" className="_min">
               <div className="row">
                 <AddAndUpdateSoftware />
               </div>

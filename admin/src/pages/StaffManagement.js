@@ -69,7 +69,7 @@ const DetailStatics = () => {
           </Col>
           <Col lg={10} className="p-0">
             <Navbar navTitle="Staff Management" />
-            <div id="admin_staff_management">
+            <div id="admin_staff_management" className="_min">
               <Row>
                 <Col lg={12}>
                   <StaffsTable />
