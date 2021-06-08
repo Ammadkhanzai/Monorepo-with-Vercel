@@ -53,10 +53,8 @@ export const Sidebar = ({ activeClass }) => {
       <div id="sidebar-wrapper" >
         <ul className="sidebar-nav">
           <li className="sidebar-brand">
-            <a href="#">
-              Fileinstant
-                </a>
-          </li>
+            File Instant
+            </li>
           {menu.map((link, key) => {
 
             const linkSlug =

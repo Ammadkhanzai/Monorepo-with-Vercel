@@ -59,7 +59,7 @@ td {
 .Login {
   padding: 50px 20px;
   background: #fff;
-  width:70% ;
+  width: 70%;
   margin: 0 auto;
   margin-top: 100px;
   box-shadow: 2px 0px 6px 0px #0000005c;
@@ -74,58 +74,6 @@ td {
   max-width: 320px;
 }
 
-/* === END HERE === */
-
-/* ADMIN Sidebar CSS */
-.admin_sidebar {
-  min-height: 100vh;
-  box-shadow: 2px 0px 6px 0px #0000005c;
-  padding: 0;
-  position: fixed;
-  z-index: 99;
-  width: 17%;
-  background: #fff;
-}
-
-.admin_sidebar ul {
-  margin: 0;
-
-}
-.admin_sidebar ul li a {
-  color: #000000d4;
-  font-weight: 500;
-  text-decoration: none;
-  font-size: 14px;
-  text-transform: uppercase;
-  margin: 2px 0px;
-  padding: 10px 10px;
-  position: relative;
-  transition: 0.3s;
-  display: block;
-}
-.admin_sidebar ul li a::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: var(--blue);
-  transition: 500ms;
-}
-.admin_sidebar ul li a:hover {
-  color: #000;
-  background: rgba(0, 0, 0, 0.131);
-}
-.admin_sidebar ul li a:hover::after {
-  width: 4px;
-}
-.admin_sidebar ul li .sidePanelActive {
-  background: rgba(0, 0, 0, 0.131);
-}
-.admin_sidebar ul li .sidePanelActive::after {
-  width: 4px;
-}
 /* === END HERE === */
 
 /* ADMIN DASHBOARD CSS */
@@ -207,10 +155,16 @@ td {
 /* === END HERE === */
 
 /* ADMIN 404 Page */
-.error-template {padding: 40px 15px;text-align: center;margin-top: 50px;}
-.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-template {
+  padding: 40px 15px;
+  text-align: center;
+  margin-top: 50px;
+}
+.error-actions {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 /* === END HERE === */
-
 
 #wrapper {
   padding-left: 0;
@@ -230,29 +184,16 @@ td {
   padding: 0;
   position: fixed;
   z-index: 99;
-  /* width: 17%; */
   background: #fff;
   margin-left: -250px;
-
 }
 
 #wrapper.toggled #sidebar-wrapper {
   width: 250px;
 }
 
-#page-content-wrapper {
-  width: 100%;
-  position: absolute;
-  padding: 15px;
-}
-
-#wrapper.toggled #page-content-wrapper {
-  position: absolute;
-  margin-right: -250px;
-}
-
 .sidebar-nav {
-    min-height: 100vh;
+  min-height: 100vh;
   box-shadow: 2px 0px 6px 0px #0000005c;
   padding: 0;
   position: fixed;
@@ -261,20 +202,11 @@ td {
   background: #fff;
 }
 
-
-/* .sidebar-nav li {
-  text-indent: 20px;
-  line-height: 40px;
-} */
-
 .sidebar-nav li a {
-  /* display: block;
-  text-decoration: none;
-  color: rgba(0,0,0,.8313725490196079); */
   color: #000000d4;
   font-weight: 500;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
   margin: 2px 0px;
   padding: 10px 10px;
@@ -282,57 +214,47 @@ td {
   transition: 0.3s;
   display: block;
 }
-
+.sidebar-wrapper ul li a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--blue);
+  transition: 500ms;
+}
 .sidebar-nav li a:hover {
-  text-decoration: none;
   color: #000;
   background: rgba(0, 0, 0, 0.131);
 }
 
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-  text-decoration: none;
-  background: var(--blue);
-  transition: 500ms;
-  color: #ffffff;
+.sidebar-nav li .sidePanelActive {
+  background: rgba(0, 0, 0, 0.131);
 }
 
 .sidebar-nav > .sidebar-brand {
   height: 65px;
   font-size: 20px;
   line-height: 60px;
+  font-weight: bold;
+  margin-left: 10px;
 }
 
-.sidebar-nav > .sidebar-brand a {
-  color: #000000;
-  background-color:none;
-}
-
-
-@media(min-width:992px) {
+@media (min-width: 992px) {
   #wrapper {
-      padding-left: 250px;
+    padding-left: 250px;
   }
 
   #wrapper.toggled {
-      padding-left: 0;
+    padding-left: 0;
   }
 
   #sidebar-wrapper {
-      width: 17%;
+    width: 17%;
   }
 
   #wrapper.toggled #sidebar-wrapper {
-      width: 0;
-  }
-
-  #page-content-wrapper {
-      padding: 20px;
-      position: relative;
-  }
-
-  #wrapper.toggled #page-content-wrapper {
-      position: relative;
-      margin-right: 0;
+    width: 0;
   }
 }
