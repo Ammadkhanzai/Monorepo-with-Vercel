@@ -190,11 +190,19 @@ td {
   position: relative;
   transition: 0.3s;
   margin-top: 10px;
+  
 }
 
-/* .sidebar-nav-min li .sidePanelActive {
-  background: rgba(0, 0, 0, 0.131);
-} */
+.sidebar-nav-min li a {
+  color: #000000d4;
+  margin: 2px 0px;
+  transition: 0.3s;
+  
+}
+.sidebar-nav-min li .sidePanelActive {
+  border-bottom: solid var(--blue) 3px;
+}
+
 
 #wrapper {
   padding-left: 0;
@@ -237,9 +245,9 @@ td {
 
 .sidebar-nav > .sidebar-brand {
   height: 65px;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 60px;
-  font-weight: bold;
+  font-weight: 500;
   margin-left: 10px;
 }
 

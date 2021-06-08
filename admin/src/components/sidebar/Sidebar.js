@@ -18,7 +18,7 @@ export const Sidebar = ({ activeClass }) => {
       <div id="sidebar-wrapper" >
         <ul className="sidebar-nav">
           <li className="sidebar-brand">
-            File Instant
+            FileInstant
             </li>
           {menu.map((link, key) => {
 
