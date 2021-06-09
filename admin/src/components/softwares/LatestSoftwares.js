@@ -51,7 +51,7 @@ const LatestSoftwares = () => {
     <Fragment>
       <h4>Latest Softwares</h4>
       <div className="admin_latest_softwares">
-        <Table striped bordered hover size="sm">
+        <Table responsive striped bordered hover size="sm">
           <thead>
             <tr>
               <th>#</th>

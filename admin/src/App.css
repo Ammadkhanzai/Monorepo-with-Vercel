@@ -241,6 +241,7 @@ td {
 
 .sidebar-nav li .sidePanelActive {
   background: rgba(0, 0, 0, 0.131);
+  border-left: solid var(--blue) 3px;
 }
 
 .sidebar-nav > .sidebar-brand {
@@ -251,26 +252,85 @@ td {
   margin-left: 10px;
 }
 
-@media (min-width: 992px) {
+@media only screen and (min-width: 1200px) {
+  #wrapper {
+    padding-left: 260px;
+  }
+  #sidebar-wrapper {
+    width: 20%;
+  }
+  #wrapper-min {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) {
   #wrapper {
     padding-left: 250px;
   }
   #sidebar-wrapper {
-    width: 17%;
+    width: 21%;
   }
+  #wrapper-min {
+    display: none;
+  }
+ 
 }
-
-@media (max-width: 991px) {
+@media only screen and (min-width: 767px) {
   #wrapper-min {
     padding-left: 250px;
   }
   #sidebar-wrapper-min {
-    width: 5%;
+    max-width: 6%;
   }
   .navbar {
-    margin-left: 35px;
+    margin-left: 55px;
   }
   ._min {
-    margin-left: 35px;
+    margin-left: 50px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #wrapper-min {
+    padding-left: 250px;
+  }
+  #sidebar-wrapper-min {
+    min-width: 5%;
+  }
+  .navbar {
+    margin-left: 55px;
+  }
+  ._min {
+    margin-left: 50px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  #wrapper-min {
+    padding-left: 255px;
+  }
+  #sidebar-wrapper-min {
+    width: 8%;
+  }
+  .navbar {
+    margin-left: 45px;
+  }
+  ._min {
+    margin-left: 50px;
+  }
+}
+
+@media only screen and (min-width: 599px) {
+  #wrapper-min {
+    padding-left: 250px;
+  }
+  #sidebar-wrapper-min {
+    width: 8%;
+  }
+  .navbar {
+    margin-left: 30px;
+  }
+  ._min {
+    margin-left: 30px;
   }
 }

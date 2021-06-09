@@ -56,7 +56,7 @@ const PopularSoftwares = () => {
     <Fragment>
       <h4>Popular Softwares</h4>
       <div className="admin_popular_softwares">
-        <Table striped bordered hover size="sm">
+        <Table responsive striped bordered hover size="sm">
           <thead>
             <tr>
               <th>#</th>

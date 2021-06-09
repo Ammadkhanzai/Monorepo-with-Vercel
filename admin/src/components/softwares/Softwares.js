@@ -100,7 +100,7 @@ const Softwares = () => {
     <Fragment>
       <h4>All Softwares</h4>
       <div className="admin_all_softwares">
-        <Table striped bordered hover size="sm">
+        <Table responsive striped bordered hover size="sm">
           <thead>
             <tr>
               <th>#</th>
