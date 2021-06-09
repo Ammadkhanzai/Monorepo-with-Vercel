@@ -2,13 +2,13 @@ import { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaEdit } from "react-icons/fa";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiFillFileAdd } from "react-icons/ai";
 import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
 
-const AddButton = ({data}) => {
+const AddButton = ({ data }) => {
   return (
-   <div>hello</div> 
+    <div>hello</div>
   )
 }
 
@@ -19,10 +19,10 @@ const Softwares = () => {
       .then((response) => {
         // console.log(response)
         // if (response.data.data.length > 0) {
-          // console.log("data", response.data.data)
-          return <AddButton data={'data'}/>
+        // console.log("data", response.data.data)
+        return <AddButton data={'data'} />
         // }
-        }).catch((e) => {
+      }).catch((e) => {
         console.log(e);
       });
   }
@@ -99,7 +99,7 @@ const Softwares = () => {
   return (
     <Fragment>
       <h4>All Softwares</h4>
-      <div className="admin_all_softwares">
+      <div className="admin_all_softwares" >
         <Table responsive striped bordered hover size="sm">
           <thead>
             <tr>
@@ -109,7 +109,8 @@ const Softwares = () => {
               <th>Category</th>
               <th>Date</th>
               <th>Actions</th>
-              <th>Add Software To</th>
+              <th>Latest</th>
+              <th>popular</th>
             </tr>
           </thead>
           <tbody>
@@ -135,11 +136,13 @@ const Softwares = () => {
                 <td>
                   {test(soft._id)}
                   <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
-                    Popular
+                    <AiFillFileAdd />
                   </Button>
+                </td>
+                <td>
                   <Button variant="primary" onClick={() => { addToLatest(soft._id) }}>
-                    Latest
-                    </Button>
+                    <AiFillFileAdd />
+                  </Button>
                 </td>
               </tr>
             ))}
