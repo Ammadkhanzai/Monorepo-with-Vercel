@@ -6,6 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
 import AddAndUpdateCategoryForm from "./AddAndUpdateCategoryForm";
+import Pagination from "./Pagination";
 
 const Categories = () => {
 
@@ -74,6 +75,17 @@ const Categories = () => {
 
   }, []);
 
+  //Pagination
+  const [pagination, setPagination] = useState({
+    start: 0,
+    end: 5,
+  });
+
+  const onPaginationChange = (start, end) => {
+    setPagination({ start: start, end: end });
+  };
+  //
+
   return (
     <Fragment>
       <div className="row">
@@ -87,38 +99,46 @@ const Categories = () => {
             </div>
 
             :
-            <Table striped bordered hover size="sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Category</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {categoriesData.categories.map((category, key) => (
-                  <tr key={key}>
-                    <td>{key + 1}</td>
-                    <td>{category.categoryName}</td>
-                    <td>{formatDate(category.createdAt)}</td>
-                    <td width="100px">
-                      <div className="d-flex">
-                        <Button onClick={() => deleteCategory(category._id)} variant="danger" className="mx-2">
-                          <AiFillDelete />
-                        </Button>
-                        <Button onClick={() => {
-                          setupdateId({ id: category._id })
-                        }
-                        } variant="secondary" className="mx-2">
-                          <FaEdit />
-                        </Button>
-                      </div>
-                    </td>
+            <>
+              <Table responsive striped bordered hover size="sm">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {categoriesData.categories.slice(pagination.start, pagination.end).map((category, key) => (
+                    <tr key={key}>
+                      <td>{key + 1}</td>
+                      <td>{category.categoryName}</td>
+                      <td>{formatDate(category.createdAt)}</td>
+                      <td width="100px">
+                        <div className="d-flex">
+                          <Button onClick={() => deleteCategory(category._id)} variant="danger" className="mx-2">
+                            <AiFillDelete />
+                          </Button>
+                          <Button onClick={() => {
+                            setupdateId({ id: category._id })
+                          }
+                          } variant="secondary" className="mx-2">
+                            <FaEdit />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+              <Pagination
+                key={'id'}
+                showPerPage={5}
+                onPaginationChange={onPaginationChange}
+                total={categoriesData.categories.length}
+              />
+            </>
           }
         </div>
       </div>
