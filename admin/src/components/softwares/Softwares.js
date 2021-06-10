@@ -1,10 +1,13 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaEdit } from "react-icons/fa";
-import { AiFillDelete, AiFillFileAdd } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
+import { RiAddCircleFill } from "react-icons/ri";
+
 import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
+import Pagination from "./Pagination";
 
 const AddButton = ({ data }) => {
   return (
@@ -15,9 +18,10 @@ const AddButton = ({ data }) => {
 const Softwares = () => {
 
   const test = (id) => {
+    // console.log(id)
     axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + id)
       .then((response) => {
-        // console.log(response)
+        console.log(response.data.data[0])
         // if (response.data.data.length > 0) {
         // console.log("data", response.data.data)
         return <AddButton data={'data'} />
@@ -39,7 +43,7 @@ const Softwares = () => {
   }
 
   const addToLatest = (id) => {
-    console.log(id)
+    
     axios.post(`${process.env.REACT_APP_API_URL}/api/latest-software/`, { softwareID: id })
       .then((response) =>
         console.log(response)
@@ -57,6 +61,7 @@ const Softwares = () => {
   }
 
   const [softwares, setSoftware] = useState({ softwares: [] });
+  
   function deleteSoftware(id) {
     const params = new URLSearchParams();
     params.append("id", id);
@@ -94,10 +99,20 @@ const Softwares = () => {
 
   }, []);
 
+  //Pagination
+  const [pagination, setPagination] = useState({
+    start: 0,
+    end: 10,
+  });
+
+  const onPaginationChange = (start, end) => {
+    setPagination({ start: start, end: end });
+  };
+  //
 
 
   return (
-    <Fragment>
+    <>
       <h4>All Softwares</h4>
       <div className="admin_all_softwares" >
         <Table responsive striped bordered hover size="sm">
@@ -110,11 +125,11 @@ const Softwares = () => {
               <th>Date</th>
               <th>Actions</th>
               <th>Latest</th>
-              <th>popular</th>
+              <th>Popular</th>
             </tr>
           </thead>
           <tbody>
-            {softwares.softwares.map((soft, key) => (
+            {softwares.softwares.slice(pagination.start, pagination.end).map((soft, key) => (
               <tr key={key}>
                 <td>{key + 1}</td>
                 <td>{soft.softwareName}</td>
@@ -136,20 +151,27 @@ const Softwares = () => {
                 <td>
                   {test(soft._id)}
                   <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
-                    <AiFillFileAdd />
+                    <RiAddCircleFill />
                   </Button>
                 </td>
                 <td>
                   <Button variant="primary" onClick={() => { addToLatest(soft._id) }}>
-                    <AiFillFileAdd />
+                    <RiAddCircleFill />
                   </Button>
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
+       
+        <Pagination
+          key={'id'}
+          showPerPage={10}
+          onPaginationChange={onPaginationChange}
+          total={softwares.softwares.length}
+        />
       </div>
-    </Fragment>
+    </>
   );
 };
 

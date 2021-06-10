@@ -4,7 +4,10 @@ import { AiFillDelete } from "react-icons/ai";
 import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
 
+import Pagination from "./Pagination";
+
 const LatestSoftwares = () => {
+
   function formatDate(date) {
     date = new Date(date);
     // const currentMonth = date.getMonth();
@@ -12,9 +15,10 @@ const LatestSoftwares = () => {
     const currentDate = date.getDate();
     return `${currentDate} ${monthName} ${date.getFullYear()}`;
   }
-  const [latestSoftwares, setLatestSoftware] = useState({ softwares :[]});
-  function deleteLatestSoftware(id) {
 
+  const [latestSoftwares, setLatestSoftware] = useState({ softwares: [] });
+
+  function deleteLatestSoftware(id) {
     const params = new URLSearchParams();
     params.append('id', id);
 
@@ -47,8 +51,19 @@ const LatestSoftwares = () => {
     }
   }, []);
 
+  //Pagination
+  const [pagination, setPagination] = useState({
+    start: 0,
+    end: 10,
+  });
+
+  const onPaginationChange = (start, end) => {
+    setPagination({ start: start, end: end });
+  };
+  //
+
   return (
-    <Fragment>
+    <>
       <h4>Latest Softwares</h4>
       <div className="admin_latest_softwares">
         <Table responsive striped bordered hover size="sm">
@@ -59,11 +74,11 @@ const LatestSoftwares = () => {
               <th>Version</th>
               <th>Category</th>
               <th>Date</th>
-              <th></th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {latestSoftwares.softwares.map((soft, key) => (
+            {latestSoftwares.softwares.slice(pagination.start, pagination.end).map((soft, key) => (
               <tr key={key}>
                 <td>{key + 1}</td>
                 <td>{soft.softwareID.softwareName}</td>
@@ -81,10 +96,18 @@ const LatestSoftwares = () => {
                 </td>
               </tr>
             ))}
+
           </tbody>
         </Table>
+
+        <Pagination
+          key={'id'}
+          showPerPage={10}
+          onPaginationChange={onPaginationChange}
+          total={latestSoftwares.softwares.length}
+        />
       </div>
-    </Fragment>
+    </>
   );
 };
 

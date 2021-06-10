@@ -25,7 +25,7 @@ const HomeManagement = () => {
 
   const [authLoading, setAuthLoading] = useState(true);
   const [authentic, setAuthentic] = useState(null);
-  
+
   useEffect(() => {
     const token = getToken();
     if (!token) {
@@ -60,7 +60,6 @@ const HomeManagement = () => {
     return <PageNotFound />
   }
 
-
   return (
     <div className="admin_main">
 
@@ -73,13 +72,13 @@ const HomeManagement = () => {
             <Navbar navTitle="Home Management" />
             <div id="admin_home_management" className="_min">
               <div className="row">
-                <LatestSoftwares/>
+                <LatestSoftwares />
               </div>
               <div className="row my-4">
                 <PopularSoftwares />
               </div>
               <div className="row">
-                <Softwares />
+                <Softwares/>
               </div>
             </div>
           </Col>

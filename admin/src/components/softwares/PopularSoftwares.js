@@ -6,6 +6,7 @@ import axios from "axios";
 import { AiFillDelete } from "react-icons/ai";
 import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
+import Pagination from "./Pagination";
 
 const PopularSoftwares = () => {
   function formatDate(date) {
@@ -39,18 +40,28 @@ const PopularSoftwares = () => {
         if (response.data.success) {
           setPopulorSoftware({ softwares: response.data.data });
         }
-        
+
       })
       .catch((e) => {
-        if (axios.isCancel(e)) {  
+        if (axios.isCancel(e)) {
           console.log('Request canceled', e.message);
-        }else{
+        } else {
           console.log(e);
         }
       });
-      return ()=> cancelTokenSource.cancel('Operation canceled by the user.');
+    return () => cancelTokenSource.cancel('Operation canceled by the user.');
   }, []);
-  
+
+  //Pagination
+  const [pagination, setPagination] = useState({
+    start: 0,
+    end: 10,
+  });
+
+  const onPaginationChange = (start, end) => {
+    setPagination({ start: start, end: end });
+  };
+  //
 
   return (
     <Fragment>
@@ -64,20 +75,20 @@ const PopularSoftwares = () => {
               <th>Version</th>
               <th>Category</th>
               <th>Date</th>
-              <th></th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {populorSoftwares.softwares.map((soft, key) => (
+            {populorSoftwares.softwares.slice(pagination.start, pagination.end).map((soft, key) => (
               <tr key={key}>
                 <td>{key + 1}</td>
                 <td>{soft.softwareID.softwareName} </td>
                 <td>{soft.softwareID.softwareVersion}</td>
-                <td>{(soft.softwareID.softwareCategory === null)? "un-categorized": soft.softwareID.softwareCategory.categoryName  }</td>
+                <td>{(soft.softwareID.softwareCategory === null) ? "un-categorized" : soft.softwareID.softwareCategory.categoryName}</td>
                 <td>{formatDate(soft.softwareID.createdAt)}</td>
                 <td width="100px">
                   <div className="d-flex">
-                    
+
                     <Button
                       variant="danger" onClick={() => { deletePopulorSoftware(soft._id); }} className="mx-2" >
                       <AiFillDelete />
@@ -88,6 +99,12 @@ const PopularSoftwares = () => {
             ))}
           </tbody>
         </Table>
+        <Pagination
+          key={'id'}
+          showPerPage={10}
+          onPaginationChange={onPaginationChange}
+          total={populorSoftwares.softwares.length}
+        />
       </div>
     </Fragment>
   );
