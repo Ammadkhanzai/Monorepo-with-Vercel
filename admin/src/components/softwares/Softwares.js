@@ -17,17 +17,30 @@ const AddButton = ({ data }) => {
 
 const Softwares = () => {
 
-  const test = (id) => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + id)
-      .then((response) => {
-        console.log(response.data.data[0])
-        // if (response.data.data.length > 0) {
-        // console.log("data", response.data.data)
-        return <AddButton data={'data'} />
-        // }
-      }).catch((e) => {
-        console.log(e);
-      });
+  const test = async (data) => {
+    // console.log(data)
+
+    for (var index = 0; index < data.length; index++) {
+
+      let arr = await axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + data[index]._id)
+      if (arr.data.data.length > 0) {
+        console.log(index + "", arr.data.data.length)
+      }
+
+    }
+
+
+
+    // axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + id)
+    // .then((response) => {
+    //   console.log(response.data.data[0])
+    //   // if (response.data.data.length > 0) {
+    //   // console.log("data", response.data.data)
+    //   return <AddButton data={'data'} />
+    //   // }
+    // }).catch((e) => {
+    //   console.log(e);
+    // });
   }
 
   const addToPopular = (id) => {
@@ -92,7 +105,11 @@ const Softwares = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/`, { cancelToken: cancelTokenSource.token })
       .then((response) => {
         if (response.data.success) {
+          
+          // softwares.softwares
+          test(response.data.data)
           setSoftware({ softwares: response.data.data });
+          // console.log(response.data.data)
         }
       }).catch((e) => {
         if (axios.isCancel(e)) {
@@ -196,7 +213,6 @@ const Softwares = () => {
                       </div>
                     </td>
                     <td>
-                      {/* {test(soft._id)} */}
                       <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
                         <RiAddCircleFill />
                       </Button>
@@ -208,7 +224,7 @@ const Softwares = () => {
                     </td>
                   </tr>
                 ))
-                }
+            }
           </tbody>
         </Table>
         <Pagination
