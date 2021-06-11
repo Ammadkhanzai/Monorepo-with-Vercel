@@ -18,7 +18,6 @@ const AddButton = ({ data }) => {
 const Softwares = () => {
 
   const test = (id) => {
-    // console.log(id)
     axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + id)
       .then((response) => {
         console.log(response.data.data[0])
@@ -43,7 +42,6 @@ const Softwares = () => {
   }
 
   const addToLatest = (id) => {
-    
     axios.post(`${process.env.REACT_APP_API_URL}/api/latest-software/`, { softwareID: id })
       .then((response) =>
         console.log(response)
@@ -61,7 +59,7 @@ const Softwares = () => {
   }
 
   const [softwares, setSoftware] = useState({ softwares: [] });
-  
+
   function deleteSoftware(id) {
     const params = new URLSearchParams();
     params.append("id", id);
@@ -80,6 +78,15 @@ const Softwares = () => {
       });
   }
 
+  // filter softwares
+  const [filterSoftware, setFilterSoftware] = useState(null);
+
+  const filter = (e) => {
+    setFilterSoftware({
+      softwares: softwares.softwares.filter((el) => el.softwareName.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1),
+    });
+  }
+
   useEffect(() => {
     const cancelTokenSource = axios.CancelToken.source();
     axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/`, { cancelToken: cancelTokenSource.token })
@@ -94,15 +101,18 @@ const Softwares = () => {
           console.log(e);
         }
       })
-
-    return () => cancelTokenSource.cancel('Operation canceled by the user.');
-
+    // console.log(filterSoftware)
+    return () => {
+      cancelTokenSource.cancel('Operation canceled by the user.');
+    }
   }, []);
+
+
 
   //Pagination
   const [pagination, setPagination] = useState({
     start: 0,
-    end: 10,
+    end: 5,
   });
 
   const onPaginationChange = (start, end) => {
@@ -115,6 +125,8 @@ const Softwares = () => {
     <>
       <h4>All Softwares</h4>
       <div className="admin_all_softwares" >
+        <input className="form-control search_bar" type="text" placeholder="Search.." onChange={filter} />
+        <br />
         <Table responsive striped bordered hover size="sm">
           <thead>
             <tr>
@@ -129,47 +141,83 @@ const Softwares = () => {
             </tr>
           </thead>
           <tbody>
-            {softwares.softwares.slice(pagination.start, pagination.end).map((soft, key) => (
-              <tr key={key}>
-                <td>{key + 1}</td>
-                <td>{soft.softwareName}</td>
-                <td>{soft.softwareVersion}</td>
-                <td>{(soft.softwareCategory === null) ? "un-categorized" : soft.softwareCategory.categoryName}</td>
-                <td>{formatDate(soft.createdAt)}</td>
-                <td width="100px">
-                  <div className="d-flex">
-                    <Link to={`/admin/softwares-management/edit/${soft._id}`}  >
-                      <Button variant="secondary" className="mx-2">
-                        <FaEdit />
+            {
+              (filterSoftware !== null) ?
+                filterSoftware.softwares.slice(pagination.start, pagination.end).map((soft, key) => (
+                  <tr key={key}>
+                    <td>{key + 1}</td>
+                    <td>{soft.softwareName}</td>
+                    <td>{soft.softwareVersion}</td>
+                    <td>{(soft.softwareCategory === null) ? "un-categorized" : soft.softwareCategory.categoryName}</td>
+                    <td>{formatDate(soft.createdAt)}</td>
+                    <td width="100px">
+                      <div className="d-flex">
+                        <Link to={`/admin/softwares-management/edit/${soft._id}`}  >
+                          <Button variant="secondary" className="mx-2">
+                            <FaEdit />
+                          </Button>
+                        </Link>
+                        <Button variant="danger" onClick={() => { deleteSoftware(soft._id); }} className="mx-2">
+                          <AiFillDelete />
+                        </Button>
+                      </div>
+                    </td>
+                    <td>
+                      {/* {test(soft._id)} */}
+                      <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
+                        <RiAddCircleFill />
                       </Button>
-                    </Link>
-                    <Button variant="danger" onClick={() => { deleteSoftware(soft._id) }} className="mx-2">
-                      <AiFillDelete />
-                    </Button>
-                  </div>
-                </td>
-                <td>
-                  {test(soft._id)}
-                  <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
-                    <RiAddCircleFill />
-                  </Button>
-                </td>
-                <td>
-                  <Button variant="primary" onClick={() => { addToLatest(soft._id) }}>
-                    <RiAddCircleFill />
-                  </Button>
-                </td>
-              </tr>
-            ))}
+                    </td>
+                    <td>
+                      <Button variant="primary" onClick={() => { addToLatest(soft._id) }}>
+                        <RiAddCircleFill />
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+                :
+                softwares.softwares.slice(pagination.start, pagination.end).map((soft, key) => (
+                  <tr key={key}>
+                    <td>{key + 1}</td>
+                    <td>{soft.softwareName}</td>
+                    <td>{soft.softwareVersion}</td>
+                    <td>{(soft.softwareCategory === null) ? "un-categorized" : soft.softwareCategory.categoryName}</td>
+                    <td>{formatDate(soft.createdAt)}</td>
+                    <td width="100px">
+                      <div className="d-flex">
+                        <Link to={`/admin/softwares-management/edit/${soft._id}`}  >
+                          <Button variant="secondary" className="mx-2">
+                            <FaEdit />
+                          </Button>
+                        </Link>
+                        <Button variant="danger" onClick={() => { deleteSoftware(soft._id) }} className="mx-2">
+                          <AiFillDelete />
+                        </Button>
+                      </div>
+                    </td>
+                    <td>
+                      {/* {test(soft._id)} */}
+                      <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
+                        <RiAddCircleFill />
+                      </Button>
+                    </td>
+                    <td>
+                      <Button variant="primary" onClick={() => { addToLatest(soft._id) }}>
+                        <RiAddCircleFill />
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+                }
           </tbody>
         </Table>
-       
         <Pagination
           key={'id'}
-          showPerPage={10}
+          showPerPage={5}
           onPaginationChange={onPaginationChange}
           total={softwares.softwares.length}
         />
+
       </div>
     </>
   );
