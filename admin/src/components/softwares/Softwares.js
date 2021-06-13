@@ -9,38 +9,21 @@ import Table from "react-bootstrap/esm/Table";
 import Button from "react-bootstrap/esm/Button";
 import Pagination from "./Pagination";
 
-const AddButton = ({ data }) => {
-  return (
-    <div>hello</div>
-  )
-}
 
 const Softwares = () => {
 
   const test = async (data) => {
     // console.log(data)
-
+    let arr = []
+    let count = 0;
     for (var index = 0; index < data.length; index++) {
-
-      let arr = await axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + data[index]._id)
-      if (arr.data.data.length > 0) {
-        console.log(index + "", arr.data.data.length)
-      }
-
+      let res = await axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + data[index]._id)
+      // if (res.data.data.length > 0) {
+      arr[count] = res.data.data.length
+      count++
+      // }
     }
-
-
-
-    // axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + id)
-    // .then((response) => {
-    //   console.log(response.data.data[0])
-    //   // if (response.data.data.length > 0) {
-    //   // console.log("data", response.data.data)
-    //   return <AddButton data={'data'} />
-    //   // }
-    // }).catch((e) => {
-    //   console.log(e);
-    // });
+    return arr
   }
 
   const addToPopular = (id) => {
@@ -72,6 +55,7 @@ const Softwares = () => {
   }
 
   const [softwares, setSoftware] = useState({ softwares: [] });
+  const [latestBtn, setLatestBtn] = useState({ btn: [] })
 
   function deleteSoftware(id) {
     const params = new URLSearchParams();
@@ -105,12 +89,15 @@ const Softwares = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/`, { cancelToken: cancelTokenSource.token })
       .then((response) => {
         if (response.data.success) {
-          
-          // softwares.softwares
-          test(response.data.data)
           setSoftware({ softwares: response.data.data });
-          // console.log(response.data.data)
+          test(response.data.data)
+            .then((res) => {
+              console.log(res)
+              setLatestBtn({ btn: res });
+
+            }).catch(e => console.log(e))
         }
+
       }).catch((e) => {
         if (axios.isCancel(e)) {
           console.log('Request canceled', e.message);
@@ -118,7 +105,6 @@ const Softwares = () => {
           console.log(e);
         }
       })
-    // console.log(filterSoftware)
     return () => {
       cancelTokenSource.cancel('Operation canceled by the user.');
     }
@@ -213,6 +199,13 @@ const Softwares = () => {
                       </div>
                     </td>
                     <td>
+                      {
+                        latestBtn.btn.map((val, key) => (
+                         val == 1 ? <Button key={key}>{val}</Button> : ""
+                        ))
+                      }
+                    </td>
+                    {/* <td>
                       <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
                         <RiAddCircleFill />
                       </Button>
@@ -221,7 +214,8 @@ const Softwares = () => {
                       <Button variant="primary" onClick={() => { addToLatest(soft._id) }}>
                         <RiAddCircleFill />
                       </Button>
-                    </td>
+                    </td> */}
+
                   </tr>
                 ))
             }
@@ -233,7 +227,11 @@ const Softwares = () => {
           onPaginationChange={onPaginationChange}
           total={softwares.softwares.length}
         />
-
+        {
+          // latestBtn.btn.map((val, key) => (
+          //   val == 1 ? <Button key={key}>{val}</Button> : ""
+          // ))
+        }
       </div>
     </>
   );

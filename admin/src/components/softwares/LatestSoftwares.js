@@ -54,7 +54,7 @@ const LatestSoftwares = () => {
   //Pagination
   const [pagination, setPagination] = useState({
     start: 0,
-    end: 10,
+    end: 5,
   });
 
   const onPaginationChange = (start, end) => {
@@ -102,7 +102,7 @@ const LatestSoftwares = () => {
 
         <Pagination
           key={'id'}
-          showPerPage={10}
+          showPerPage={5}
           onPaginationChange={onPaginationChange}
           total={latestSoftwares.softwares.length}
         />
