@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaEdit } from "react-icons/fa";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiOutlineCheck } from "react-icons/ai";
+import { BsPlus } from "react-icons/bs";
 import { RiAddCircleFill } from "react-icons/ri";
 
 import Table from "react-bootstrap/esm/Table";
@@ -12,22 +13,13 @@ import Pagination from "./Pagination";
 
 const Softwares = () => {
 
-  const test = async (data) => {
-    // console.log(data)
-    let arr = []
-    let count = 0;
-    for (var index = 0; index < data.length; index++) {
-      let res = await axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/single/` + data[index]._id)
-      // if (res.data.data.length > 0) {
-      arr[count] = res.data.data.length
-      count++
-      // }
-    }
-    return arr
+  function formatDate(date) {
+    date = new Date(date);
+    const currentMonth = date.getMonth();
+    const currentDate = date.getDate();
+    return `${currentMonth}/${currentDate}/${date.getFullYear()}`;
   }
-
-  const addToPopular = (id) => {
-    // console.log(id)
+  function addToPopular(id) {
     axios.post(`${process.env.REACT_APP_API_URL}/api/popular-software/`, { softwareID: id })
       .then((response) =>
         console.log(response)
@@ -37,7 +29,7 @@ const Softwares = () => {
       )
   }
 
-  const addToLatest = (id) => {
+  function addToLatest(id) {
     axios.post(`${process.env.REACT_APP_API_URL}/api/latest-software/`, { softwareID: id })
       .then((response) =>
         console.log(response)
@@ -47,15 +39,8 @@ const Softwares = () => {
       )
   }
 
-  function formatDate(date) {
-    date = new Date(date);
-    const currentMonth = date.getMonth();
-    const currentDate = date.getDate();
-    return `${currentMonth}/${currentDate}/${date.getFullYear()}`;
-  }
 
-  const [softwares, setSoftware] = useState({ softwares: [] });
-  const [latestBtn, setLatestBtn] = useState({ btn: [] })
+
 
   function deleteSoftware(id) {
     const params = new URLSearchParams();
@@ -76,9 +61,32 @@ const Softwares = () => {
   }
 
   // filter softwares
+  const [softwares, setSoftware] = useState({ softwares: [] });
   const [filterSoftware, setFilterSoftware] = useState(null);
+  const [latestCheck, setLatestCheck] = useState({ software: [] });
+  const [popularCheck, setPopularCheck] = useState({ software: [] });
 
-  const filter = (e) => {
+
+  const filterLatestSoft = (id) => {
+    let res = latestCheck.software.find((el) => {
+      if (id === el.softwareID._id) {
+        return true
+      }
+    })
+    return res
+  }
+
+  const filterPopularSoft = (id) => {
+    let res = popularCheck.software.find((el) => {
+      if (id === el.softwareID._id) {
+        return true
+      }
+    })
+    return res
+  }
+
+
+  function filter(e) {
     setFilterSoftware({
       softwares: softwares.softwares.filter((el) => el.softwareName.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1),
     });
@@ -86,18 +94,41 @@ const Softwares = () => {
 
   useEffect(() => {
     const cancelTokenSource = axios.CancelToken.source();
+    //Latest Software
+    axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/`, { cancelToken: cancelTokenSource.token })
+      .then((response) => {
+        setLatestCheck({ software: response.data.data })
+      }).catch((e) => {
+        if (axios.isCancel(e)) {
+          console.log('Request canceled', e.message);
+        } else {
+          console.log(e);
+        }
+      })
+
+    axios.get(`${process.env.REACT_APP_API_URL}/api/popular-software/`, { cancelToken: cancelTokenSource.token })
+      .then((response) => {
+        setPopularCheck({ software: response.data.data })
+      }).catch((e) => {
+        if (axios.isCancel(e)) {
+          console.log('Request canceled', e.message);
+        } else {
+          console.log(e);
+        }
+      })
+
+    return () => {
+      cancelTokenSource.cancel('Operation canceled by the user.');
+    }
+  }, []);
+
+  useEffect(() => {
+    const cancelTokenSource = axios.CancelToken.source();
     axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/`, { cancelToken: cancelTokenSource.token })
       .then((response) => {
         if (response.data.success) {
           setSoftware({ softwares: response.data.data });
-          test(response.data.data)
-            .then((res) => {
-              console.log(res)
-              setLatestBtn({ btn: res });
-
-            }).catch(e => console.log(e))
         }
-
       }).catch((e) => {
         if (axios.isCancel(e)) {
           console.log('Request canceled', e.message);
@@ -108,8 +139,7 @@ const Softwares = () => {
     return () => {
       cancelTokenSource.cancel('Operation canceled by the user.');
     }
-  }, []);
-
+  }, [latestCheck, popularCheck])
 
 
   //Pagination
@@ -166,15 +196,26 @@ const Softwares = () => {
                       </div>
                     </td>
                     <td>
-                      {/* {test(soft._id)} */}
-                      <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
-                        <RiAddCircleFill />
-                      </Button>
+                      {
+                        filterLatestSoft(soft._id) ?
+                          <Button variant="success" disabled>
+                            <AiOutlineCheck />
+                          </Button>
+                          : <Button variant="success" onClick={() => { addToLatest(soft._id) }}>
+                            <BsPlus />
+                          </Button>
+                      }
                     </td>
                     <td>
-                      <Button variant="primary" onClick={() => { addToLatest(soft._id) }}>
-                        <RiAddCircleFill />
-                      </Button>
+                      {
+                        filterPopularSoft(soft._id) ?
+                          <Button variant="success" disabled>
+                            <AiOutlineCheck />
+                          </Button>
+                          : <Button variant="success" onClick={() => { addToPopular(soft._id) }}>
+                            <BsPlus />
+                          </Button>
+                      }
                     </td>
                   </tr>
                 ))
@@ -200,21 +241,26 @@ const Softwares = () => {
                     </td>
                     <td>
                       {
-                        latestBtn.btn.map((val, key) => (
-                         val == 1 ? <Button key={key}>{val}</Button> : ""
-                        ))
+                        filterLatestSoft(soft._id) ?
+                          <Button variant="success" disabled>
+                            <AiOutlineCheck />
+                          </Button>
+                          : <Button variant="success" onClick={() => { addToLatest(soft._id) }}>
+                            <BsPlus />
+                          </Button>
                       }
                     </td>
-                    {/* <td>
-                      <Button variant="primary" onClick={() => { addToPopular(soft._id) }} className="mx-2" >
-                        <RiAddCircleFill />
-                      </Button>
-                    </td>
                     <td>
-                      <Button variant="primary" onClick={() => { addToLatest(soft._id) }}>
-                        <RiAddCircleFill />
-                      </Button>
-                    </td> */}
+                      {
+                        filterPopularSoft(soft._id) ?
+                          <Button variant="success" disabled>
+                            <AiOutlineCheck />
+                          </Button>
+                          : <Button variant="success" onClick={() => { addToPopular(soft._id) }}>
+                            <BsPlus />
+                          </Button>
+                      }
+                    </td>
 
                   </tr>
                 ))
@@ -227,11 +273,6 @@ const Softwares = () => {
           onPaginationChange={onPaginationChange}
           total={softwares.softwares.length}
         />
-        {
-          // latestBtn.btn.map((val, key) => (
-          //   val == 1 ? <Button key={key}>{val}</Button> : ""
-          // ))
-        }
       </div>
     </>
   );
