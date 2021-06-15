@@ -530,7 +530,7 @@
     border: 1px solid #bbba;
     border-radius: 5px 5px 0px 0px;
   }
-  .download_btn {
+  /* .download_btn {
     display: flex;
     align-items: center;
     background: #dfdfdfaa;
@@ -542,7 +542,7 @@
   .download_btn svg {
     fill: var(--green);
     margin-right: 5px;
-  }
+  } */
   .download_latest_version {
     background: #dfdfdfaa;
     padding: 5px 10px;
