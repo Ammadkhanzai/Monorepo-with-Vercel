@@ -26,6 +26,7 @@ const AddAndUpdateSoftware = () => {
     license: "",
     author: "",
     sha: "",
+    software_url: ""
   });
   let { id } = useParams();
 
@@ -53,6 +54,7 @@ const AddAndUpdateSoftware = () => {
     formData.append("softwareLicense", softwareInputs.license);
     formData.append("softwareAuthor", softwareInputs.author);
     formData.append("softwareSHA", softwareInputs.sha);
+    formData.append("software_url", softwareInputs.software_url);
 
     axios.put(`${process.env.REACT_APP_API_URL}/api/software-management/`, formData)
       .then((response) => {
@@ -104,7 +106,7 @@ const AddAndUpdateSoftware = () => {
     formData.append("softwareLicense", softwareInputs.license);
     formData.append("softwareAuthor", softwareInputs.author);
     formData.append("softwareSHA", softwareInputs.sha);
-
+    formData.append("software_url", softwareInputs.software_url);
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/software-management/`, formData)
       .then((response) => {
@@ -121,6 +123,7 @@ const AddAndUpdateSoftware = () => {
             license: "",
             author: "",
             sha: "",
+            software_url: ""
           });
           setCustomFiles(null);
           document.getElementById("fileicon").value = null;
@@ -180,6 +183,7 @@ const AddAndUpdateSoftware = () => {
               license: response.data.data.softwareLicense,
               author: response.data.data.softwareAuthor,
               sha: response.data.data.softwareSHA,
+              software_url: response.data.data.softwareLink
             });
           }
         })
@@ -408,10 +412,9 @@ const AddAndUpdateSoftware = () => {
         </Row>
 
         <Row className="my-2">
-          <h4 className="mb-4">Download Link</h4>
           <Form.Group as={Row} controlId="formHorizontalEmail">
             <Form.Label column sm={3}>
-              <strong>Url: *</strong>
+              <strong>Download Url: *</strong>
             </Form.Label>
             <Col sm={9}>
               <Form.Control

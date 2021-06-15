@@ -39,9 +39,6 @@ const Softwares = () => {
       )
   }
 
-
-
-
   function deleteSoftware(id) {
     const params = new URLSearchParams();
     params.append("id", id);
@@ -106,6 +103,14 @@ const Softwares = () => {
         }
       })
 
+    return () => {
+      cancelTokenSource.cancel('Operation canceled by the user.');
+    }
+  }, []);
+
+  useEffect(() => {
+    const cancelTokenSource = axios.CancelToken.source();
+    //Popular Software
     axios.get(`${process.env.REACT_APP_API_URL}/api/popular-software/`, { cancelToken: cancelTokenSource.token })
       .then((response) => {
         setPopularCheck({ software: response.data.data })
@@ -261,7 +266,6 @@ const Softwares = () => {
                           </Button>
                       }
                     </td>
-
                   </tr>
                 ))
             }
