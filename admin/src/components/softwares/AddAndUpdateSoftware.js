@@ -136,7 +136,7 @@ const AddAndUpdateSoftware = () => {
           document.getElementById("fileicon").value = null;
           document.getElementById("filescreenshots").value = null;
           setIsLoading(false);
-        
+
         } else {
           setErrorMessage("Invalid data");
           // setCustomFiles(null);
@@ -287,9 +287,9 @@ const AddAndUpdateSoftware = () => {
         <Row className="my-2">
           <Col>
             <Form.Group>
+            <Form.Label>Software Icon</Form.Label>
               <Form.File
                 id="fileicon"
-                label="Add Icon"
                 name="icon"
                 required
                 onChange={onFileChange}
@@ -402,6 +402,25 @@ const AddAndUpdateSoftware = () => {
                 required
                 multiple
                 onChange={onFileChange}
+              />
+            </Col>
+          </Form.Group>
+        </Row>
+
+        <Row className="my-2">
+          <h4 className="mb-4">Download Link</h4>
+          <Form.Group as={Row} controlId="formHorizontalEmail">
+            <Form.Label column sm={3}>
+              <strong>Url: *</strong>
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control
+                type="url"
+                placeholder="Enter software download link here"
+                name="software_url"
+                value={softwareInputs.software_url}
+                required
+                onChange={onChange}
               />
             </Col>
           </Form.Group>
