@@ -1,24 +1,24 @@
 import { Fragment, useState } from "react";
 import Link from 'next/link'
 
-
-
 import DownloadDetails from "./DownloadDetails";
 import DownloadScreenshots from "./DownloadScreenshots";
 import DownloadShare from "./DownloadShare";
 import DownloadTechnical from "./DownloadTechnical";
 import DownloadReview from "./DownloadReview";
-import {AiOutlineDownload} from "react-icons/ai"
+import { ImDownload } from "react-icons/im"
 
 
 const DownloadContent = ({ software, oldSoftware }) => {
-
-  console.log(software.softwareLink)
 
   const [state, setState] = useState("description");
   const onTabChange = (tab) => {
     setState(tab);
   };
+
+  const downloadBtnHandeler = (link) => {
+    window.open(link);
+  }
 
   const oldVersion = oldSoftware.response.map((item, key) => {
 
@@ -129,20 +129,9 @@ const DownloadContent = ({ software, oldSoftware }) => {
         </div>
         <div className="col-lg-3 col-md-12">
           <div className="download_versions">
-            {/* <Link href="/download/wait/chrome" >
-              <a  className="download_btn" >
-                              
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M16 11h5l-9 10-9-10h5v-11h8v11zm3 8v3h-14v-3h-2v5h18v-5h-2z"></path>
-                </svg>
-              <h4>Download</h4>
-              </a>
-            </Link> */}
-
             <div className="download_btn">
-            <AiOutlineDownload/>
-              <button >
-                <h4>Download</h4>
+              <button onClick={() =>downloadBtnHandeler(software.response.softwareLink)} >
+                <h5><ImDownload /> Download</h5>
               </button>
             </div>
 

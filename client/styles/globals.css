@@ -530,21 +530,21 @@ footer {
 
 .download_btn {
   display: flex;
-  padding: 5px 30px;
+  width: 100%;
+  padding: 5px 20px;
   color: #3d3d3d;
   background: #dfdfdfaa;
   margin-bottom: 20px;
 }
-.download_btn button {
-  background-color: none;
+.download_btn button { 
+  background: Transparent no-repeat;
   border: none;
   cursor: pointer;
   font-size: 10px;
 }
-/* .download_btn button svg {
+.download_btn button svg {
   fill: var(--green);
-  margin-right: 5px;
-} */
+}
 .download_latest_version {
   background: #dfdfdfaa;
   padding: 5px 10px;
