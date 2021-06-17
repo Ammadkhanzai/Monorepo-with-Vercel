@@ -1,12 +1,39 @@
 import { useRouter } from 'next/router'
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useEffect, useState } from "react";
 
 import SoftwareListItem from "../../../components/software/SoftwareListItem"
 import CategorySoftwareListItem from "../../../components/software/CategorySoftwareListItem"
 
 import axios from 'axios';
 
-export default function byCategory({softwares , flag}){
-    // console.log(softwares)
+export default function byCategory({softwares , flag , count , categoryID}){
+
+    const [posts, setPosts] = useState(softwares.response);
+    const [hasMore, setHasMore] = useState(true);
+    
+    const getMorePosts = async () => {
+    
+      const res = await axios.get(`http://localhost:5000/api/software-management/${categoryID}/3/${posts.length}`)
+                            .then(response => {
+                              return { code : 200 , response : response.data.data }  
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                                return { code : 404 , response : error }
+                            })
+      
+      if(res.code == 200){
+        setPosts((posts) => [...posts, ...res.response]);
+        
+      }
+    };
+
+    useEffect(() => {
+      setHasMore(count.response > posts.length ? true : false);
+    }, [posts]);
+    
+
 
     const router = useRouter()
     const { category } = router.query
@@ -41,9 +68,21 @@ export default function byCategory({softwares , flag}){
                             <SoftwareListItem key={key} version={item} />
                         ))
                         : 
-                        softwares.response.map((item, key) => (
-                            <CategorySoftwareListItem key={key} item={item} />
-                        )) 
+                        <InfiniteScroll
+                          dataLength={posts.length}
+                          next={getMorePosts}
+                          hasMore={hasMore}
+                          loader={<h4>Loading...</h4>}
+                          endMessage={
+                            <p style={{ textAlign: "center" }}>
+                              <b>Yay! You have seen it all</b>
+                            </p>
+                          }
+                        >
+                         { posts.map((item, key)=>(
+                              <CategorySoftwareListItem key={key} item={item} />
+                          ))}
+                        </InfiniteScroll> 
                         
                     }
               </div>
@@ -67,6 +106,19 @@ export async function getServerSideProps(context) {
     const category = context.params.category
     let softwares;
     let flag;
+    let count = null;
+    
+
+    const softwareCount = async ()=>{
+      const response = axios.get(`http://localhost:5000/api/software-management/count`)
+      .then(response => {
+          return { code : 200 , response : response.data.data }
+      })
+      .catch((error) => {
+          return { code : 404 , response : error }
+      })
+      return response  
+  }
     
     const software = async ()=>{
         const response = axios.get(`${process.env.REACT_APP_API_URL}/api/${context.params.category}`)
@@ -83,7 +135,7 @@ export async function getServerSideProps(context) {
     const softwareByCategory = async ()=>{
         const response = axios.get(`${process.env.REACT_APP_API_URL}/api/category/single/${context.params.category}`)
         .then(response => {
-           return axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/${response.data.data[0]._id}/`)
+           return axios.get(`http://localhost:5000/api/software-management/${response.data.data[0]._id}/3/`)
             .then(response => {
                 flag = true;
                 return { code : 200 , response : response.data.data }
@@ -102,12 +154,14 @@ export async function getServerSideProps(context) {
         softwares = await software() 
     }else{
         softwares = await softwareByCategory() 
+        count = await softwareCount()
     }
-    
+
+    let categoryID = response.data.data[0]._id; 
     
     if(softwares.code === 200 ){
         return {
-        props: { softwares , flag }, 
+        props: { softwares , flag , count , categoryID }, 
         }
     }else{
         return {
