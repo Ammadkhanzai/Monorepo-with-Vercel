@@ -251,6 +251,9 @@ td {
   font-weight: 500;
   margin-left: 10px;
 }
+.search_bar{
+width: 200px;
+}
 
  
 @media only screen and (min-width: 1200px) {
@@ -270,7 +273,7 @@ td {
     padding-left: 250px;
   }
   #sidebar-wrapper {
-    width: 21%;
+    width: 19%;
   }
   #wrapper-min {
     display: none;

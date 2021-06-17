@@ -26,6 +26,7 @@ const AddAndUpdateSoftware = () => {
     license: "",
     author: "",
     sha: "",
+    software_url: ""
   });
   let { id } = useParams();
 
@@ -53,6 +54,7 @@ const AddAndUpdateSoftware = () => {
     formData.append("softwareLicense", softwareInputs.license);
     formData.append("softwareAuthor", softwareInputs.author);
     formData.append("softwareSHA", softwareInputs.sha);
+    formData.append("software_url", softwareInputs.software_url);
 
     axios.put(`${process.env.REACT_APP_API_URL}/api/software-management/`, formData)
       .then((response) => {
@@ -104,7 +106,7 @@ const AddAndUpdateSoftware = () => {
     formData.append("softwareLicense", softwareInputs.license);
     formData.append("softwareAuthor", softwareInputs.author);
     formData.append("softwareSHA", softwareInputs.sha);
-
+    formData.append("software_url", softwareInputs.software_url);
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/software-management/`, formData)
       .then((response) => {
@@ -121,6 +123,7 @@ const AddAndUpdateSoftware = () => {
             license: "",
             author: "",
             sha: "",
+            software_url: ""
           });
           setCustomFiles(null);
           document.getElementById("fileicon").value = null;
@@ -136,7 +139,7 @@ const AddAndUpdateSoftware = () => {
           document.getElementById("fileicon").value = null;
           document.getElementById("filescreenshots").value = null;
           setIsLoading(false);
-        
+
         } else {
           setErrorMessage("Invalid data");
           // setCustomFiles(null);
@@ -180,6 +183,7 @@ const AddAndUpdateSoftware = () => {
               license: response.data.data.softwareLicense,
               author: response.data.data.softwareAuthor,
               sha: response.data.data.softwareSHA,
+              software_url: response.data.data.softwareLink
             });
           }
         })
@@ -287,9 +291,9 @@ const AddAndUpdateSoftware = () => {
         <Row className="my-2">
           <Col>
             <Form.Group>
+            <Form.Label>Software Icon</Form.Label>
               <Form.File
                 id="fileicon"
-                label="Add Icon"
                 name="icon"
                 required
                 onChange={onFileChange}
@@ -402,6 +406,24 @@ const AddAndUpdateSoftware = () => {
                 required
                 multiple
                 onChange={onFileChange}
+              />
+            </Col>
+          </Form.Group>
+        </Row>
+
+        <Row className="my-2">
+          <Form.Group as={Row} controlId="formHorizontalEmail">
+            <Form.Label column sm={3}>
+              <strong>Download Url: *</strong>
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control
+                type="url"
+                placeholder="Enter software download link here"
+                name="software_url"
+                value={softwareInputs.software_url}
+                required
+                onChange={onChange}
               />
             </Col>
           </Form.Group>
