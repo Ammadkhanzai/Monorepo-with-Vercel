@@ -62,7 +62,8 @@ const Softwares = () => {
   const [filterSoftware, setFilterSoftware] = useState(null);
   const [latestCheck, setLatestCheck] = useState({ software: [] });
   const [popularCheck, setPopularCheck] = useState({ software: [] });
-
+  const [loadingPopular, setLoadingPopular] = useState(true);
+  const [loadingLatest, setLoadingLatest] = useState(true);
 
   const filterLatestSoft = (id) => {
     let res = latestCheck.software.find((el) => {
@@ -71,6 +72,7 @@ const Softwares = () => {
       }
     })
     return res
+
   }
 
   const filterPopularSoft = (id) => {
@@ -94,7 +96,8 @@ const Softwares = () => {
     //Latest Software
     axios.get(`${process.env.REACT_APP_API_URL}/api/latest-software/`, { cancelToken: cancelTokenSource.token })
       .then((response) => {
-        setLatestCheck({ software: response.data.data })
+        setLatestCheck({ software: response.data.data });
+        setLoadingLatest(false);
       }).catch((e) => {
         if (axios.isCancel(e)) {
           console.log('Request canceled', e.message);
@@ -113,7 +116,8 @@ const Softwares = () => {
     //Popular Software
     axios.get(`${process.env.REACT_APP_API_URL}/api/popular-software/`, { cancelToken: cancelTokenSource.token })
       .then((response) => {
-        setPopularCheck({ software: response.data.data })
+        setPopularCheck({ software: response.data.data });
+        setLoadingPopular(false);
       }).catch((e) => {
         if (axios.isCancel(e)) {
           console.log('Request canceled', e.message);
@@ -200,28 +204,37 @@ const Softwares = () => {
                         </Button>
                       </div>
                     </td>
-                    <td>
-                      {
-                        filterLatestSoft(soft._id) ?
-                          <Button variant="success" disabled>
-                            <AiOutlineCheck />
-                          </Button>
-                          : <Button variant="success" onClick={() => { addToLatest(soft._id) }}>
-                            <BsPlus />
-                          </Button>
-                      }
-                    </td>
-                    <td>
-                      {
-                        filterPopularSoft(soft._id) ?
-                          <Button variant="success" disabled>
-                            <AiOutlineCheck />
-                          </Button>
-                          : <Button variant="success" onClick={() => { addToPopular(soft._id) }}>
-                            <BsPlus />
-                          </Button>
-                      }
-                    </td>
+                    {
+                      loadingLatest ? <td>Loading...</td>
+                        :
+
+                        <td>
+                          {
+                            filterLatestSoft(soft._id) ?
+                              <Button variant="success" disabled>
+                                <AiOutlineCheck />
+                              </Button>
+                              : <Button variant="success" onClick={() => { addToLatest(soft._id) }}>
+                                <BsPlus />
+                              </Button>
+                          }
+                        </td>
+                    }
+                    {
+                      loadingPopular ? <td>Loading...</td>
+                        :
+                        <td>
+                          {
+                            filterPopularSoft(soft._id) ?
+                              <Button variant="success" disabled>
+                                <AiOutlineCheck />
+                              </Button>
+                              : <Button variant="success" onClick={() => { addToPopular(soft._id) }}>
+                                <BsPlus />
+                              </Button>
+                          }
+                        </td>
+                    }
                   </tr>
                 ))
                 :
@@ -244,28 +257,38 @@ const Softwares = () => {
                         </Button>
                       </div>
                     </td>
-                    <td>
-                      {
-                        filterLatestSoft(soft._id) ?
-                          <Button variant="success" disabled>
-                            <AiOutlineCheck />
-                          </Button>
-                          : <Button variant="success" onClick={() => { addToLatest(soft._id) }}>
-                            <BsPlus />
-                          </Button>
-                      }
-                    </td>
-                    <td>
-                      {
-                        filterPopularSoft(soft._id) ?
-                          <Button variant="success" disabled>
-                            <AiOutlineCheck />
-                          </Button>
-                          : <Button variant="success" onClick={() => { addToPopular(soft._id) }}>
-                            <BsPlus />
-                          </Button>
-                      }
-                    </td>
+                    {
+                      loadingLatest ? <td>Loading...</td>
+                        :
+
+                        <td>
+                          {
+                            filterLatestSoft(soft._id) ?
+                              <Button variant="success" disabled>
+                                <AiOutlineCheck />
+                              </Button>
+                              : <Button variant="success" onClick={() => { addToLatest(soft._id) }}>
+                                <BsPlus />
+                              </Button>
+                          }
+                        </td>
+                    }
+                    {
+                      loadingPopular ? <td>Loading...</td>
+                        :
+                        <td>
+                          {
+                            filterPopularSoft(soft._id) ?
+                              <Button variant="success" disabled>
+                                <AiOutlineCheck />
+                              </Button>
+                              : <Button variant="success" onClick={() => { addToPopular(soft._id) }}>
+                                <BsPlus />
+                              </Button>
+                          }
+                        </td>
+                    }
+
                   </tr>
                 ))
             }
