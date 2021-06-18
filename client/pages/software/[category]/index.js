@@ -14,7 +14,7 @@ export default function byCategory({ softwares, flag, count, categoryID }) {
 
   const getMorePosts = async () => {
 
-    const res = await axios.get(`http://localhost:5000/api/software-management/${categoryID}/${posts.length}`)
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/${categoryID}/${posts.length}`)
       .then(response => {
         return { code: 200, response: response.data.data }
       })
@@ -101,8 +101,6 @@ export default function byCategory({ softwares, flag, count, categoryID }) {
 
 
 export async function getServerSideProps(context) {
-
-
   const category = context.params.category
   let softwares;
   let flag;
@@ -127,7 +125,7 @@ export async function getServerSideProps(context) {
     const response = axios.get(`${process.env.REACT_APP_API_URL}/api/category/single/${context.params.category}`)
       .then(response => {
         categoryID = response.data.data[0]._id;
-        return axios.get(`http://localhost:5000/api/software-management/${response.data.data[0]._id}/3/`)
+        return axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/${response.data.data[0]._id}/3/`)
           .then(response => {
             flag = true;
             return { code: 200, response: response.data.data }
@@ -143,7 +141,7 @@ export async function getServerSideProps(context) {
   }
 
   const softwareCount = async () => {
-    const response = axios.get(`http://localhost:5000/api/software-management/count/${categoryID}`)
+    const response = axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/count/${categoryID}`)
       .then(response => {
         return { code: 200, response: response.data.data }
       })
