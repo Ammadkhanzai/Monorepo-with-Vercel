@@ -107,8 +107,6 @@ export async function getServerSideProps(context) {
   let count = null;
   let categoryID = null
 
-  // console.log(context);
-
   const software = async () => {
     const response = axios.get(`${process.env.REACT_APP_API_URL}/api/${context.params.category}`)
       .then(response => {
