@@ -18,10 +18,7 @@ const DownloadContent = ({ software, oldSoftware }) => {
   };
 
   const downloadBtnHandeler = (link) => {
-    // window.open(link);
-    
     router.push(link)
-
   }
 
   const oldVersion = oldSoftware.response.map((item, key) => {
@@ -134,10 +131,9 @@ const DownloadContent = ({ software, oldSoftware }) => {
         <div className="col-lg-3 col-md-12">
           <div className="download_versions">
             <div className="download_btn">
-              <button onClick={() =>downloadBtnHandeler(software.response.softwareLink)} >
+              <button onClick={() => downloadBtnHandeler(software.response.softwareLink)} >
                 <h5><ImDownload /> Download</h5>
               </button>
-              {/* <a href={software.response.softwareLink} target="_blank">download</a> */}
             </div>
 
             <div className="download_latest_version">
