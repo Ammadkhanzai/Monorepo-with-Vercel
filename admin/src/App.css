@@ -215,7 +215,7 @@ td {
 #sidebar-wrapper {
   min-height: 100vh;
   box-shadow: 2px 0px 6px 0px #0000005c;
-  padding: 0;
+  padding: 15px 10px;
   position: fixed;
   z-index: 99;
   background: #fff;
@@ -240,7 +240,7 @@ td {
 }
 
 .sidebar-nav li .sidePanelActive {
-  background: rgba(0, 0, 0, 0.131);
+  background: rgba(250, 196, 196, 0.131);
   border-left: solid var(--blue) 3px;
 }
 

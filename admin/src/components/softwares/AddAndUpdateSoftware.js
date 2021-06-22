@@ -11,6 +11,7 @@ const AddAndUpdateSoftware = () => {
   // eslint-disable-next-line
   const [formState, setFormState] = useState("add");
   const [isLoading, setIsLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
   const [message, setMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [customFiles, setCustomFiles] = useState({});
@@ -163,6 +164,7 @@ const AddAndUpdateSoftware = () => {
       document.getElementById('fileicon').removeAttribute("required");
       document.getElementById('filescreenshots').removeAttribute("required");
       setFormState("edit");
+      setUpdateLoading(true);
       const cancelTokenSource = axios.CancelToken.source();
       axios.get(
         `${process.env.REACT_APP_API_URL}/api/software-management/fetch/`,
@@ -171,7 +173,6 @@ const AddAndUpdateSoftware = () => {
       )
         .then((response) => {
           if (response.data.success) {
-
             setSoftwareInputs({
               name: response.data.data.softwareName,
               versions: response.data.data.softwareVersion,
@@ -185,7 +186,9 @@ const AddAndUpdateSoftware = () => {
               sha: response.data.data.softwareSHA,
               software_url: response.data.data.softwareLink
             });
+            setUpdateLoading(false)
           }
+
         })
         .catch((e) => {
           if (axios.isCancel(e)) {
@@ -193,6 +196,7 @@ const AddAndUpdateSoftware = () => {
           } else {
             console.log(e.message);
           }
+          setUpdateLoading(false)
         });
       return () => {
         cancelTokenSource.cancel("Operation canceled by the user.");
@@ -222,221 +226,230 @@ const AddAndUpdateSoftware = () => {
   return (
     <Fragment>
       <h3>{formState === "add" ? "Add New Software" : "Update Software"}</h3>
-      <Form onSubmit={formState === "add" ? formHandler : formHandlerUpdate}>
-        <Row className="my-2">
-          <Col>
-            <span style={{ color: "green" }}>{message}</span>
-          </Col>
-        </Row>
-        <Row className="my-2">
-          <Col>
-            <Form.Label>Software Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter software name here..."
-              name="name"
-              value={softwareInputs.name}
-              required
-              onChange={onChange}
-            />
-          </Col>
-          <Col>
-            <Form.Label>Software Version</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter software version here..."
-              name="versions"
-              value={softwareInputs.versions}
-              required
-              onChange={onChange}
-            />
-          </Col>
-        </Row>
+      {
+        updateLoading ?
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="sr-only"></span>
+            </div>
+          </div>
+          :
+          <Form onSubmit={formState === "add" ? formHandler : formHandlerUpdate}>
+            <Row className="my-2">
+              <Col>
+                <span style={{ color: "green" }}>{message}</span>
+              </Col>
+            </Row>
+            <Row className="my-2">
+              <Col>
+                <Form.Label>Software Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter software name here..."
+                  name="name"
+                  value={softwareInputs.name}
+                  required
+                  onChange={onChange}
+                />
+              </Col>
+              <Col>
+                <Form.Label>Software Version</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter software version here..."
+                  name="versions"
+                  value={softwareInputs.versions}
+                  required
+                  onChange={onChange}
+                />
+              </Col>
+            </Row>
 
-        <Row className="my-2">
-          <Col>
-            <Form.Label>Software Category</Form.Label>
-            <Form.Control
-              as="select"
-              name="category"
-              value={softwareInputs.category}
-              required
-              onChange={onChange}
-            >
-              <option value="">Select software category</option>
+            <Row className="my-2">
+              <Col>
+                <Form.Label>Software Category</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="category"
+                  value={softwareInputs.category}
+                  required
+                  onChange={onChange}
+                >
+                  <option value="">Select software category</option>
 
-              {categories.categories.map((category, key) => (
-                <option value={category._id} key={key}>
-                  {category.categoryName}
-                </option>
-              ))}
-            </Form.Control>
-          </Col>
-        </Row>
-        <Row className="my-2">
-          <Col>
-            <Form.Label>Software Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Enter software description here..."
-              minLength="128"
-              name="description"
-              value={softwareInputs.description}
-              required
-              onChange={onChange}
-            />
-          </Col>
-        </Row>
-        <Row className="my-2">
-          <Col>
-            <Form.Group>
-            <Form.Label>Software Icon</Form.Label>
-              <Form.File
-                id="fileicon"
-                name="icon"
-                required
-                onChange={onFileChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row className="my-2">
-          <h4 className="mb-4">Technical Info</h4>
-          <Form.Group as={Row} controlId="formHorizontalEmail">
-            <Form.Label column sm={3}>
-              <strong>Requirements: *</strong>
-            </Form.Label>
-            <Col sm={9}>
-              <Form.Control
-                type="text"
-                placeholder="eg. Windows 10, Windows 8, Windows 7"
-                name="requirements"
-                value={softwareInputs.requirements}
-                required
-                onChange={onChange}
-              />
-            </Col>
-          </Form.Group>
+                  {categories.categories.map((category, key) => (
+                    <option value={category._id} key={key}>
+                      {category.categoryName}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Col>
+            </Row>
+            <Row className="my-2">
+              <Col>
+                <Form.Label>Software Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  placeholder="Enter software description here..."
+                  minLength="128"
+                  name="description"
+                  value={softwareInputs.description}
+                  required
+                  onChange={onChange}
+                />
+              </Col>
+            </Row>
+            <Row className="my-2">
+              <Col>
+                <Form.Group>
+                  <Form.Label>Software Icon</Form.Label>
+                  <Form.File
+                    id="fileicon"
+                    name="icon"
+                    required
+                    onChange={onFileChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="my-2">
+              <h4 className="mb-4">Technical Info</h4>
+              <Form.Group as={Row} controlId="formHorizontalEmail">
+                <Form.Label column sm={3}>
+                  <strong>Requirements: *</strong>
+                </Form.Label>
+                <Col sm={9}>
+                  <Form.Control
+                    type="text"
+                    placeholder="eg. Windows 10, Windows 8, Windows 7"
+                    name="requirements"
+                    value={softwareInputs.requirements}
+                    required
+                    onChange={onChange}
+                  />
+                </Col>
+              </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={3}>
-              <strong>Language: *</strong>
-            </Form.Label>
-            <Col sm={9}>
-              <Form.Control
-                type="text"
-                placeholder="Enter Language here..."
-                name="language"
-                value={softwareInputs.language}
-                required
-                onChange={onChange}
-              />
-            </Col>
-          </Form.Group>
+              <Form.Group as={Row} controlId="formHorizontalPassword">
+                <Form.Label column sm={3}>
+                  <strong>Language: *</strong>
+                </Form.Label>
+                <Col sm={9}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Language here..."
+                    name="language"
+                    value={softwareInputs.language}
+                    required
+                    onChange={onChange}
+                  />
+                </Col>
+              </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={3}>
-              <strong>Available languages: *</strong>
-            </Form.Label>
-            <Col sm={9}>
-              <Form.Control
-                type="text"
-                placeholder="eg. English, Russian, Perisan, Arabic"
-                name="availableLanguages"
-                value={softwareInputs.availableLanguages}
-                required
-                onChange={onChange}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={3}>
-              <strong>License: *</strong>
-            </Form.Label>
-            <Col sm={9}>
-              <Form.Control
-                type="text"
-                placeholder="Enter software license here..."
-                name="license"
-                value={softwareInputs.license}
-                required
-                onChange={onChange}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={3}>
-              <strong>Author: *</strong>
-            </Form.Label>
-            <Col sm={9}>
-              <Form.Control
-                type="text"
-                placeholder="Enter software author here..."
-                name="author"
-                value={softwareInputs.author}
-                required
-                onChange={onChange}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={3}>
-              <strong>SHA-1:</strong>
-            </Form.Label>
-            <Col sm={9}>
-              <Form.Control
-                type="text"
-                placeholder="Enter SHA-1 here..."
-                name="sha"
-                value={softwareInputs.sha}
-                required
-                onChange={onChange}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalPassword">
-            <Form.Label column sm={3}>
-              <strong>Screenshots:</strong>
-            </Form.Label>
-            <Col sm={9}>
-              <Form.File
-                id="filescreenshots"
-                name="screenshots"
-                required
-                multiple
-                onChange={onFileChange}
-              />
-            </Col>
-          </Form.Group>
-        </Row>
+              <Form.Group as={Row} controlId="formHorizontalPassword">
+                <Form.Label column sm={3}>
+                  <strong>Available languages: *</strong>
+                </Form.Label>
+                <Col sm={9}>
+                  <Form.Control
+                    type="text"
+                    placeholder="eg. English, Russian, Perisan, Arabic"
+                    name="availableLanguages"
+                    value={softwareInputs.availableLanguages}
+                    required
+                    onChange={onChange}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} controlId="formHorizontalPassword">
+                <Form.Label column sm={3}>
+                  <strong>License: *</strong>
+                </Form.Label>
+                <Col sm={9}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter software license here..."
+                    name="license"
+                    value={softwareInputs.license}
+                    required
+                    onChange={onChange}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} controlId="formHorizontalPassword">
+                <Form.Label column sm={3}>
+                  <strong>Author: *</strong>
+                </Form.Label>
+                <Col sm={9}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter software author here..."
+                    name="author"
+                    value={softwareInputs.author}
+                    required
+                    onChange={onChange}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} controlId="formHorizontalPassword">
+                <Form.Label column sm={3}>
+                  <strong>SHA-1:</strong>
+                </Form.Label>
+                <Col sm={9}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter SHA-1 here..."
+                    name="sha"
+                    value={softwareInputs.sha}
+                    required
+                    onChange={onChange}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} controlId="formHorizontalPassword">
+                <Form.Label column sm={3}>
+                  <strong>Screenshots:</strong>
+                </Form.Label>
+                <Col sm={9}>
+                  <Form.File
+                    id="filescreenshots"
+                    name="screenshots"
+                    required
+                    multiple
+                    onChange={onFileChange}
+                  />
+                </Col>
+              </Form.Group>
+            </Row>
 
-        <Row className="my-2">
-          <Form.Group as={Row} controlId="formHorizontalEmail">
-            <Form.Label column sm={3}>
-              <strong>Download Url: *</strong>
-            </Form.Label>
-            <Col sm={9}>
-              <Form.Control
-                type="url"
-                placeholder="Enter software download link here"
-                name="software_url"
-                value={softwareInputs.software_url}
-                required
-                onChange={onChange}
-              />
-            </Col>
-          </Form.Group>
-        </Row>
-        {errorMessage && <div><span style={{ color: "red" }}>{errorMessage}</span></div>}
-        {isLoading ? (
-          "Submitting........"
-        ) : (
-          <Button variant="primary" className="btn-block" type="submit">
-            {formState === "add" ? "Add Software" : "Update Software"}
-          </Button>
-        )}
-      </Form>
+            <Row className="my-2">
+              <Form.Group as={Row} controlId="formHorizontalEmail">
+                <Form.Label column sm={3}>
+                  <strong>Download Url: *</strong>
+                </Form.Label>
+                <Col sm={9}>
+                  <Form.Control
+                    type="url"
+                    placeholder="Enter software download link here"
+                    name="software_url"
+                    value={softwareInputs.software_url}
+                    required
+                    onChange={onChange}
+                  />
+                </Col>
+              </Form.Group>
+            </Row>
+            {errorMessage && <div><span style={{ color: "red" }}>{errorMessage}</span></div>}
+            {isLoading ? (
+              "Submitting........"
+            ) : (
+              <Button variant="primary" className="btn-block" type="submit">
+                {formState === "add" ? "Add Software" : "Update Software"}
+              </Button>
+            )}
+          </Form>
+      }
     </Fragment>
   );
 };

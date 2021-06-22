@@ -17,6 +17,7 @@ const LatestSoftwares = () => {
   }
 
   const [latestSoftwares, setLatestSoftware] = useState({ softwares: [] });
+  const [loading, setLoading] = useState(true);
 
   function deleteLatestSoftware(id) {
     const params = new URLSearchParams();
@@ -38,13 +39,16 @@ const LatestSoftwares = () => {
       .then((response) => {
         if (response.data.success) {
           setLatestSoftware({ softwares: response.data.data });
+          setLoading(false)
         }
+
       }).catch((e) => {
         if (axios.isCancel(e)) {
           console.log('Request canceled', e.message);
         } else {
           console.log(e);
         }
+        setLoading(false)
       });
     return () => {
       cancelTokenSource.cancel('Operation canceled by the user.');
@@ -65,48 +69,58 @@ const LatestSoftwares = () => {
   return (
     <>
       <h4>Latest Softwares</h4>
-      <div className="admin_latest_softwares">
-        <Table responsive striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Version</th>
-              <th>Category</th>
-              <th>Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {latestSoftwares.softwares.slice(pagination.start, pagination.end).map((soft, key) => (
-              <tr key={key}>
-                <td>{key + 1}</td>
-                <td>{soft.softwareID.softwareName}</td>
-                <td>{soft.softwareID.softwareVersion}</td>
-                <td>{(soft.softwareID.softwareCategory === null) ? "un-categorized" : soft.softwareID.softwareCategory.categoryName}</td>
-                <td>{formatDate(soft.softwareID.createdAt)}</td>
-                <td width="100px">
-                  <div className="d-flex">
+      {
+        loading ?
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="sr-only"></span>
+            </div>
+          </div>
+          :
+          <div className="admin_latest_softwares">
+            <Table responsive striped bordered hover size="sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Version</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {latestSoftwares.softwares.slice(pagination.start, pagination.end).map((soft, key) => (
+                  <tr key={key}>
+                    <td>{key + 1}</td>
+                    <td>{soft.softwareID.softwareName}</td>
+                    <td>{soft.softwareID.softwareVersion}</td>
+                    <td>{(soft.softwareID.softwareCategory === null) ? "un-categorized" : soft.softwareID.softwareCategory.categoryName}</td>
+                    <td>{formatDate(soft.softwareID.createdAt)}</td>
+                    <td width="100px">
+                      <div className="d-flex">
 
-                    <Button variant="danger" onClick={() => { deleteLatestSoftware(soft._id) }} className="mx-2">
-                      <AiFillDelete />
-                    </Button>
+                        <Button variant="danger" onClick={() => { deleteLatestSoftware(soft._id) }} className="mx-2">
+                          <AiFillDelete />
+                        </Button>
 
-                  </div>
-                </td>
-              </tr>
-            ))}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
 
-          </tbody>
-        </Table>
+              </tbody>
+            </Table>
 
-        <Pagination
-          key={'id'}
-          showPerPage={5}
-          onPaginationChange={onPaginationChange}
-          total={latestSoftwares.softwares.length}
-        />
-      </div>
+            <Pagination
+              key={'id'}
+              showPerPage={5}
+              onPaginationChange={onPaginationChange}
+              total={latestSoftwares.softwares.length}
+            />
+          </div>
+
+      }
     </>
   );
 };
