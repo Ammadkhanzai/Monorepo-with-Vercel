@@ -8,21 +8,19 @@ import CategorySoftwareListItem from "../../../components/software/CategorySoftw
 import axios from 'axios';
 
 export default function byCategory({ softwares, flag, count, categoryID }) {
-
+  
   const [posts, setPosts] = useState(softwares.response);
   const [hasMore, setHasMore] = useState(true);
-  const [more, setMore] = useState(true);
 
   const router = useRouter()
   const { category } = router.query
-  
+
   const getMorePosts = async () => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/${categoryID}/${posts.length}`)
       .then(response => {
         return { code: 200, response: response.data.data }
       })
       .catch((error) => {
-        console.log(error);
         return { code: 404, response: error }
       })
 
@@ -32,7 +30,7 @@ export default function byCategory({ softwares, flag, count, categoryID }) {
     }
   };
 
-  const getMorePosts2 = async () => {
+  const getMoreLatestPopularPost = async () => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/${category}/${posts.length}`)
       .then(response => {
         return { code: 200, response: response.data.data }
@@ -44,16 +42,14 @@ export default function byCategory({ softwares, flag, count, categoryID }) {
 
     if (res.code == 200) {
       setPosts((posts) => [...posts, ...res.response]);
-
     }
   };
 
   useEffect(() => {
 
     setHasMore(count.response > posts.length ? true : false);
-    setMore(count > posts.length ? true : false);
+    
   }, [posts]);
-
 
 
 
@@ -84,14 +80,10 @@ export default function byCategory({ softwares, flag, count, categoryID }) {
             </h5>
             {
               (flag === false) ?
-                // softwares.response.map((item, key) => (
-                //   <SoftwareListItem key={key} version={item} />
-                // ))
-
                 <InfiniteScroll
                   dataLength={posts.length}
-                  next={getMorePosts2}
-                  hasMore={more}
+                  next={getMoreLatestPopularPost}
+                  hasMore={hasMore}
                   loader={<h4>Loading...</h4>}
                   endMessage={
                     <p style={{ textAlign: "center" }}>
@@ -99,7 +91,7 @@ export default function byCategory({ softwares, flag, count, categoryID }) {
                     </p>
                   }
                 >
-                  {softwares.response.map((item, key) => (
+                  {posts.map((item, key) => (
                     <SoftwareListItem key={key} version={item} />
                   ))}
                 </InfiniteScroll>
@@ -144,7 +136,7 @@ export async function getServerSideProps(context) {
   let categoryID = null
 
   const software = async () => {
-    const response = axios.get(`${process.env.REACT_APP_API_URL}/api/${category}`)
+    const response = axios.get(`${process.env.REACT_APP_API_URL}/api/${category}/3/`)
       .then(response => {
         flag = false;
         return { code: 200, response: response.data.data }
@@ -186,6 +178,17 @@ export async function getServerSideProps(context) {
     return response
   }
 
+  const LatestPopularSoftCount = async () => {
+    const response = axios.get(`${process.env.REACT_APP_API_URL}/api/${category}`)
+      .then(response => {
+        return { code: 200, response: response.data.data.length }
+      })
+      .catch((error) => {
+        return { code: 404, response: error }
+      })
+    return response
+  }
+
   if (category === 'latest-software' || category === 'popular-software') {
     softwares = await software()
   } else {
@@ -198,7 +201,7 @@ export async function getServerSideProps(context) {
   if (softwares.code === 200) {
 
     if (category === 'latest-software' || category === 'popular-software') {
-      count = 5
+      count = await LatestPopularSoftCount()
     } else {
       count = await softwareCount()
     }
