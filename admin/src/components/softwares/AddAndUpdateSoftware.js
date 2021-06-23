@@ -11,7 +11,7 @@ const AddAndUpdateSoftware = () => {
   // eslint-disable-next-line
   const [formState, setFormState] = useState("add");
   const [isLoading, setIsLoading] = useState(false);
-  const [updateLoading, setUpdateLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(true);
   const [message, setMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [customFiles, setCustomFiles] = useState({});
@@ -161,10 +161,7 @@ const AddAndUpdateSoftware = () => {
 
   useEffect(() => {
     if (id) {
-      document.getElementById('fileicon').removeAttribute("required");
-      document.getElementById('filescreenshots').removeAttribute("required");
       setFormState("edit");
-      setUpdateLoading(true);
       const cancelTokenSource = axios.CancelToken.source();
       axios.get(
         `${process.env.REACT_APP_API_URL}/api/software-management/fetch/`,
@@ -187,6 +184,8 @@ const AddAndUpdateSoftware = () => {
               software_url: response.data.data.softwareLink
             });
             setUpdateLoading(false)
+            document.getElementById('fileicon').removeAttribute("required");
+            document.getElementById('filescreenshots').removeAttribute("required");
           }
 
         })
