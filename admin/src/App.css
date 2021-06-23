@@ -240,7 +240,7 @@ td {
 }
 
 .sidebar-nav li .sidePanelActive {
-  background: rgba(129, 100, 100, 0.131);
+  background: rgba(76, 78, 245, 0.131);
   border-left: solid var(--blue) 3px;
 }
 
