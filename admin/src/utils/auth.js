@@ -1,13 +1,4 @@
-// export const isAuthenticated = user => !!user;
-
-// export const isAllowed = (user, rights) =>
-//   rights.some(right => user.rights.includes(right));
-
-// export const hasRole = (user, roles) =>
-//   roles.some(role => user.roles.includes(role));
-
-import { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/authContext';
 
