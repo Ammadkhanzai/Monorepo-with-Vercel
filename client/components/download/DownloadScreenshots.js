@@ -8,7 +8,7 @@ const DownloadScreenshots = ({software}) => {
 
           {Object.keys(software.softwareScreenshot).map(( v , index)=>(
             <div className='col-4' key={index}>
-              <img src={`${process.env.REACT_APP_API_URL}/uploads/${software.softwareScreenshot[v]}`} alt="" />
+              <img src={`${process.env.REACT_APP_API_URL}/uploads/${software.softwareScreenshot[v]}`} alt={software.softwareName + " screenshot"} />
             </div>
           ))}
         </div>
