@@ -12,7 +12,7 @@ export default function index({ software, oldSoftware }) {
 
   const router = useRouter()
   const { params } = router.query
-  // console.log("https://fileinstant.com/"+ params[0] + "/" + params[1])
+
 
   return (
     <>

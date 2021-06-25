@@ -1,8 +1,9 @@
 import Link from 'next/link'
+
 const SoftwareListItem = ({ version }) => {
   return (
     <div className="category_downloads_item">
-      <img src={`${process.env.REACT_APP_API_URL}/uploads/${version.softwareID.softwareIcon}`} alt="icon" />
+      <img src={`${process.env.REACT_APP_API_URL}/uploads/${version.softwareID.softwareIcon}`} alt={version.softwareID.softwareName + " Icon" } />
       <div>
       
           <h5> 
