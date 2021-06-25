@@ -29,7 +29,7 @@ export default function index({ software, oldSoftware }) {
         <meta property="og:image" content={`${process.env.REACT_APP_API_URL}/uploads/${software.response.softwareIcon}`} />
 
         <meta property="og:site_name" content="Fileinstant" />
-        <meta property="og:url" content={`https://fileinstant.com/${params[0]}/${params[1]}`} />
+        <meta property="og:url" content={`https://fileinstant.com/download/${params[0]}/${params[1]}`} />
         <meta property="og:type" content="article" />
         <meta property="article:publisher" content="https://fileinstant.com/" />
 
