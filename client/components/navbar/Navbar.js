@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { NavbarData } from "./NavbarData";
-// import Searchbar from "./Searchbar";
+import Searchbar from "./Searchbar";
 import SideNav from "./SideNav";
 
 const Navbar = () => {
@@ -34,7 +34,7 @@ const Navbar = () => {
         </div>
         <div className="col-9">
           <div className="add_top">
-            {/* <img src="../public/add2.png" alt="" /> */}
+            <img src="/add2.png" alt="" />
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@ const Navbar = () => {
               </ul>
             </div>
             <FaBars className="navToggleBtn" onClick={toggleSidebar} />
-            {/* <Searchbar /> */}
+            <Searchbar />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
-import LayoutWrapper from "../layouts/layout-wrapper"
+// import LayoutWrapper from "../layouts/layout-wrapper"
+import DefaultLayout from '../layouts/public'
 import Router from 'next/router'
 import ProgressBar from "@badrap/bar-of-progress"
 
@@ -16,12 +17,11 @@ Router.events.on("routeChangeComplete", progress.finish)
 Router.events.on("routeChangeError", progress.finish)
 
 function MyApp({ Component, pageProps }) {
-
+  
   return (
-    <LayoutWrapper {...pageProps}>
+    <DefaultLayout {...pageProps}>
       <Component {...pageProps} />
-    </LayoutWrapper>
-    
+    </DefaultLayout>
   )
 }
 

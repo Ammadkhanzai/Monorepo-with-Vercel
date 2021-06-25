@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from 'next/link'
 
 const Searchbar = () => {
 
@@ -18,16 +18,12 @@ const Searchbar = () => {
     if(search === null || search.search === "" || search.search === " " ) return;
     axios.get(`${process.env.REACT_APP_API_URL}/api/software-management/search/${search.search}`, { cancelToken: cancelTokenSource.token })
       .then(response => {
-        console.log(response)
         setData(response.data.data)
         
       })
       .catch((error) => {
         console.log(error)
-        // setLoading(false
       })
-      
-
     return () => {
       cancelTokenSource.cancel('Operation canceled by the user.')
     }
@@ -52,8 +48,9 @@ const Searchbar = () => {
           <ul >
             {data.map((item,key)=>(
               <li key={key}>  
-              
-              <Link to={{ pathname: '/download/'+item.softwareName.trim().split(" ").join("-").toLowerCase()+'/'+item._id  }} >{item.softwareName} {item.softwareVersion}</Link>
+              <Link href={{ pathname: '/download/'+item.softwareName.trim().split(" ").join("-").toLowerCase()+'/'+item._id  }} >
+                {item.softwareName+" "+item.softwareVersion}
+                </Link>
               </li>
             ))}
           </ul>

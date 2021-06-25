@@ -1,14 +1,15 @@
-import { useRouter } from 'next/router'
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useEffect, useState } from "react";
-
 import SoftwareListItem from "../../../components/software/SoftwareListItem"
 import CategorySoftwareListItem from "../../../components/software/CategorySoftwareListItem"
 
+import { useRouter } from 'next/router'
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useEffect, useState } from "react";
 import axios from 'axios';
+import Head from 'next/head'
+
 
 export default function byCategory({ softwares, flag, count, categoryID }) {
-  
+
   const [posts, setPosts] = useState(softwares.response);
   const [hasMore, setHasMore] = useState(true);
 
@@ -48,82 +49,91 @@ export default function byCategory({ softwares, flag, count, categoryID }) {
   useEffect(() => {
 
     setHasMore(count.response > posts.length ? true : false);
-    
+
   }, [posts]);
 
 
+  function capitalizeFirstLetter(string) {
+    let str = string.charAt(0).toUpperCase() + string.slice(1);
+    return str.split('-').join(' ');
+  }
 
 
   return (
+    <>
+      <Head>
+        <title>{capitalizeFirstLetter(category)} | Fileinstant</title>
+      </Head>
 
-    <div className="download_list">
-      <div className="row mb-5">
-        <div className="col-lg-3 col-md-3">
-          <div className="row mb-5 left-right-add">
-            <div className="col-12">
-              <div className="addvertisement">
-                <h4 className="bg-secondary text-light text-center">Advertise</h4>
-                <img src="/addy.PNG" alt="" className="img-fluid w-100" />
+      <div className="download_list">
+        <div className="row mb-5">
+          <div className="col-lg-3 col-md-3">
+            <div className="row mb-5 left-right-add">
+              <div className="col-12">
+                <div className="addvertisement">
+                  <h4 className="bg-secondary text-light text-center">Advertise</h4>
+                  <img src="/addy.PNG" alt="" className="img-fluid w-100" />
+                </div>
+              </div>
+            </div>
+            <div className="row left-right-add">
+              <div className="col-8 mx-auto">
+                <div className="left_add_box">120 x 120</div>
               </div>
             </div>
           </div>
-          <div className="row left-right-add">
-            <div className="col-8 mx-auto">
-              <div className="left_add_box">120 x 120</div>
+          <div className="col-lg-9 col-md-9">
+            <div className="category_downloads">
+              <h5 className="category_downloads_title">
+                {category.trim().split("-").join(" ").toUpperCase()}
+              </h5>
+              {
+                (flag === false) ?
+                  <InfiniteScroll
+                    dataLength={posts.length}
+                    next={getMoreLatestPopularPost}
+                    hasMore={hasMore}
+                    loader={<h4>Loading...</h4>}
+                    endMessage={
+                      <p style={{ textAlign: "center" }}>
+                        <b>Yay! You have seen it all</b>
+                      </p>
+                    }
+                  >
+                    {posts.map((item, key) => (
+                      <SoftwareListItem key={key} version={item} />
+                    ))}
+                  </InfiniteScroll>
+                  :
+                  <InfiniteScroll
+                    dataLength={posts.length}
+                    next={getMorePosts}
+                    hasMore={hasMore}
+                    loader={<h4>Loading...</h4>}
+                    endMessage={
+                      <p style={{ textAlign: "center" }}>
+                        <b>Yay! You have seen it all</b>
+                      </p>
+                    }
+                  >
+                    {posts.map((item, key) => (
+                      <CategorySoftwareListItem key={key} item={item} />
+                    ))}
+                  </InfiniteScroll>
+
+              }
             </div>
           </div>
         </div>
-        <div className="col-lg-9 col-md-9">
-          <div className="category_downloads">
-            <h5 className="category_downloads_title">
-              {category.trim().split("-").join(" ").toUpperCase()}
-            </h5>
-            {
-              (flag === false) ?
-                <InfiniteScroll
-                  dataLength={posts.length}
-                  next={getMoreLatestPopularPost}
-                  hasMore={hasMore}
-                  loader={<h4>Loading...</h4>}
-                  endMessage={
-                    <p style={{ textAlign: "center" }}>
-                      <b>Yay! You have seen it all</b>
-                    </p>
-                  }
-                >
-                  {posts.map((item, key) => (
-                    <SoftwareListItem key={key} version={item} />
-                  ))}
-                </InfiniteScroll>
-                :
-                <InfiniteScroll
-                  dataLength={posts.length}
-                  next={getMorePosts}
-                  hasMore={hasMore}
-                  loader={<h4>Loading...</h4>}
-                  endMessage={
-                    <p style={{ textAlign: "center" }}>
-                      <b>Yay! You have seen it all</b>
-                    </p>
-                  }
-                >
-                  {posts.map((item, key) => (
-                    <CategorySoftwareListItem key={key} item={item} />
-                  ))}
-                </InfiniteScroll>
-
-            }
+        <div className="row">
+          <div className="col-12">
+            <div className="add_bottom">
+              <img src="/add2.PNG" alt="" />
+            </div>
           </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col-12">
-          <div className="add_bottom">
-            <img src="/add2.PNG" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
 

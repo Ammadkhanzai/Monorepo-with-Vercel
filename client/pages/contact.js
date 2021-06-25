@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Head from 'next/head'
 
 const Contact = () => {
   const [contactDetails, setContactDetails] = useState({
@@ -14,6 +15,11 @@ const Contact = () => {
   };
 
   return (
+    <>
+      <Head>
+        <title>Contact us | Fileinstant</title>
+      </Head>
+
       <div className="contact_us">
         <h2>Contact Us</h2>
         <div className="contact_details">
@@ -149,6 +155,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
+    </>
   );
 };
 
