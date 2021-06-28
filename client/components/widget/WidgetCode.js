@@ -6,7 +6,7 @@ const WidgetCode = () => {
   const WidgetContext = useContext(widgetContext);
   const {
     widgetWidth,
-    // showIcons,
+    showIcons,
     dateSize,
     linkSize,
     lineSpacing,
@@ -83,45 +83,33 @@ const WidgetCode = () => {
             }
           })()}
           <br />
-          {`
-.fh_box a{color:${linkColor};text-decoration:none;font-size:${linkSize}}`}
+          {`.fh_box a{color:${linkColor};text-decoration:none;font-size:${linkSize}}`}
           <br />
-          {`
-ul.fh_items{font-size:12px;list-style:none;margin:5px;padding:0;}`}
+          {`ul.fh_items{font-size:12px;list-style:none;margin:5px;padding:0;}`}
           <br />
-          {`
-.fh_date{color:${dateColor};font-size:${dateSize};font-weight:bold;margin-top:2px;line-height:${lineSpacing};}`}
+          {`.fh_date{color:${dateColor};font-size:${dateSize};font-weight:bold;margin-top:2px;line-height:${lineSpacing};}`}
           <br />
-          {`
-.fh_item{margin:3px 0px 3px 0px;}`}
+          {`.fh_item{margin:3px 0px 3px 0px;}`}
           <br />
-          {`
-.fh_item img{border:0px;padding-right:3px;vertical-align:top;width:16px;height:16px;}`}
+          {`.fh_item img{border:0px;padding-right:3px;vertical-align:top;width:16px;height:16px;visibility:${showIcons ? 'visible' : 'hidden'}; }`}
           <br />
-          {`
--->`}
+          {`-->`}
           <br />
-          {`
-</style>`}
+          {`</style>`}
           <br />
-          {`
-<div class="fh_box">`}
+          {`<div class="fh_box">`}
           <br />
-          {`
-<div class="fh_title">`}
+          {`<div class="fh_title">`}
           <br />
           {`<a href="http://www.filehippo.com/" target="_blank">Latest downloads</a>`}
           <br />
           {`</div>`}
           <br />
-          {`
-<div align="right" style="padding:16px 5px 5px 5px;font-size:11px">`}
+          {`<div align="right" style="padding:16px 5px 5px 5px;font-size:11px">`}
           <br />
-          {`
-<a href="http://www.filehippo.com/" target="_blank" style="color:#000">Powered by FileHippo.com</a>`}
+          {`<a href="http://www.filehippo.com/" target="_blank" style="color:#000">Powered by FileHippo.com</a>`}
           <br />
-          {`
-</div>`}
+          {`</div>`}
           <br />
           {`</div>`}
           <script
