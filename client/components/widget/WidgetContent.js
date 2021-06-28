@@ -27,7 +27,7 @@ const WidgetContent = () => {
   const onChange = (e) => fieldChange(e.target.name, e.target.value);
   const onCheck = (e) =>
     checkboxChange(e.target.name, e.target.checked ? true : false);
-
+  
   return (
     <div className='widget_content'>
       <div className='widget_option'>

@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -15,18 +14,14 @@ import {
 } from "react-share";
 
 
-const DownloadShare = ( ) => {
+const DownloadShare = () => {
   // console.log(window.location.href)
   const url = "https://fileinstant.herokuapp.com/download/firefox/60939c34f56eaa2be005ef4f"
   return (
-    
     <div className="download_details" >
-       
-        
-        
       <h5>Share</h5>
       <div className="download_share_buttons my-4">
-        <FacebookShareButton url={url}  className="download_share_btn">
+        <FacebookShareButton url={url} className="download_share_btn">
           <FacebookIcon size={40} />
         </FacebookShareButton>
         <TwitterShareButton url={url} className="download_share_btn">
@@ -46,6 +41,7 @@ const DownloadShare = ( ) => {
         </EmailShareButton>
       </div>
     </div>
+
   );
 };
 export default DownloadShare;
