@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
-// import LayoutWrapper from "../layouts/layout-wrapper"
 import DefaultLayout from '../layouts/public'
 import Router from 'next/router'
 import ProgressBar from "@badrap/bar-of-progress"
