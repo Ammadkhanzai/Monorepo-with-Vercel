@@ -33,7 +33,8 @@ const Widget = () => {
               <WidgetContent />
             </div>
             <div className="col-lg-6 col-md-12">
-              <WidgetPreview />
+              {/* <WidgetPreview /> */}
+              <my-component first="Next.js" last="The React Framework"></my-component>
             </div>
           </div>
           <div className="row">
