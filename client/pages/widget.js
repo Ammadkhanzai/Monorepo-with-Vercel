@@ -3,10 +3,20 @@ import WidgetCode from "../components/widget/WidgetCode";
 import WidgetContent from "../components/widget/WidgetContent";
 import WidgetPreview from "../components/widget/WidgetPreview";
 import WidgetState from "../context/fileinstant/widget/widgetState";
-import Head from 'next/head'
+import Head from 'next/head';
+import {useEffect} from 'react';
+import { applyPolyfills, defineCustomElements } from 'test-component/loader';
 
 
 const Widget = () => {
+
+  useEffect(() => {
+    applyPolyfills().then(() => {
+      defineCustomElements(window)
+    })
+  
+  }, [])
+
   return (
     <>
       <Head>
@@ -34,7 +44,7 @@ const Widget = () => {
             </div>
             <div className="col-lg-6 col-md-12">
               {/* <WidgetPreview /> */}
-              <my-component first="Next.js" last="The React Framework"></my-component>
+              <my-component></my-component>
             </div>
           </div>
           <div className="row">

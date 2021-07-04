@@ -3,7 +3,6 @@ import '../styles/globals.css'
 import DefaultLayout from '../layouts/public'
 import Router from 'next/router'
 import ProgressBar from "@badrap/bar-of-progress"
-import { applyPolyfills, defineCustomElements } from '../../test-component/loader'
 import { useEffect } from 'react'
 
 const progress = new ProgressBar({
@@ -19,12 +18,7 @@ Router.events.on("routeChangeError", progress.finish)
 
 function MyApp({ Component, pageProps }) {
 
-  useEffect(() => {
-    applyPolyfills().then(() => {
-      defineCustomElements(window)
-    })
   
-  }, [])
   
   return (
     <DefaultLayout {...pageProps}>

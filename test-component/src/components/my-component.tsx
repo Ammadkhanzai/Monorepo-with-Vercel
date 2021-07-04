@@ -39,7 +39,7 @@ export class MyComponent {
           <li>04 Jan</li>
           <li>
             
-            <a href="/#">google chrome 28.0.1500.95</a>
+            <a href="/#">add chrome 28.0.1500.95</a>
           </li>
           <li>
             

@@ -1,11 +1,4 @@
-:root {
-    --blue: #0d6efd;
-    --light: #eeeeee;
-    --yellow: #ffd400;
-    --orange: #ff7c00;
-    --green: rgb(25, 184, 25);
-  }
-  
+
   * {
     margin: 0;
     padding: 0;
@@ -18,8 +11,6 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  
-    /* background-image: url("back-texture.jpg"); */
   }
   
   code {
@@ -29,10 +20,10 @@
   
   .widget_preview {
     padding: 20px;
-    width: 70%;
+    width: 40%;
   }
   .widget_preview h4 {
-    background: var(--blue);
+    background: #0d6efd;
     color: #fff;
     padding: 6px 10px;
     border-radius: 5px 5px 0px 0px;
@@ -99,93 +90,6 @@
   }
   /* === END HERE === */
   
-  /* DOWNLOAD CSS */
-  
-  #download {
-    background: #fff;
-    padding: 15px;
-  }
-  .download_title {
-    display: flex;
-  }
-  .download_title img {
-    width: 6%;
-    margin-right: 10px;
-  }
-  .download_title_desc > * {
-    margin: 0;
-  }
-  .download_content {
-    display: initial;
-  }
-  .download_menu {
-    background: var(--yellow);
-    border-radius: 5px 5px 0px 0px;
-  }
-  .download_menu ul {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 10px;
-    padding-bottom: 0;
-    flex-direction: row;
-  }
-  .download_menu ul li {
-    cursor: pointer;
-    padding: 10px 8px;
-    border-radius: 5px 5px 0px 0px;
-    display: inline;
-  }
-  .download_menu .download_active {
-    background: #fff;
-  }
-  .download_details {
-    border: 1px solid #bbb;
-    border-top: none;
-    padding: 15px;
-  }
-  .download_versions {
-    border: 1px solid #bbba;
-    border-radius: 5px 5px 0px 0px;
-  }
-  .download_btn {
-    display: flex;
-    align-items: center;
-    background: #dfdfdfaa;
-    padding: 5px 10px;
-    color: #3d3d3d;
-    cursor: pointer;
-    margin-bottom: 20px;
-  }
-  .download_btn svg {
-    fill: var(--green);
-    margin-right: 5px;
-  }
-  .download_latest_version {
-    background: #dfdfdfaa;
-    padding: 5px 10px;
-  }
-  .download_versions_list {
-    padding: 5px 10px;
-  }
-  .download_screenshots img {
-    width: 100%;
-    box-shadow: 0 0 6px -2px #000;
-  }
-  .download_technical tr {
-    line-height: 30px;
-  }
-  .download_share_buttons {
-    text-align: center;
-  }
-  .download_share_btn {
-    outline: none !important;
-  }
-  .download_share_btn svg {
-    color: #fff !important;
-    border-radius: 50px;
-    box-shadow: 0px 2px 8px -2px #000;
-    margin: 0px 10px;
-  }
   a{
     text-decoration: none;
   }
