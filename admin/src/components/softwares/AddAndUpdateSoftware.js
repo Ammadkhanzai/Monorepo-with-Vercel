@@ -210,8 +210,11 @@ const AddAndUpdateSoftware = () => {
       cancelToken: cancelTokenSource.token,
     })
       .then((response) => {
-        if (response.data.success)
+        if (response.data.success) {
           setCategories({ categories: response.data.data });
+        }
+        setUpdateLoading(false)
+        
       })
       .catch((e) => {
         if (axios.isCancel(e)) {
@@ -222,6 +225,7 @@ const AddAndUpdateSoftware = () => {
       });
     return () => cancelTokenSource.cancel("Operation canceled by the user.");
   }, []);
+
   return (
     <Fragment>
       <h3>{formState === "add" ? "Add New Software" : "Update Software"}</h3>
