@@ -29,7 +29,10 @@
     border-radius: 5px 5px 0px 0px;
     box-shadow: 0px 0px 2px 0px #000;
     margin: 0;
+    font-size: 1.3rem;
+    font-weight:500;
   }
+
   .latest_download_content {
     border-radius: 5px;
     box-shadow: 0px 0px 2px 0px #000;
