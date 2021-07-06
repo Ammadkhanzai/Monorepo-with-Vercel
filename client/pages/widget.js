@@ -5,7 +5,7 @@ import WidgetPreview from "../components/widget/WidgetPreview";
 import WidgetState from "../context/fileinstant/widget/widgetState";
 import Head from 'next/head';
 import {useEffect} from 'react';
-import { applyPolyfills, defineCustomElements } from 'test-component/loader';
+import { applyPolyfills, defineCustomElements } from 'fileinstant-widget/loader';
 
 
 const Widget = () => {
@@ -43,8 +43,7 @@ const Widget = () => {
               <WidgetContent />
             </div>
             <div className="col-lg-6 col-md-12">
-              {/* <WidgetPreview /> */}
-              <my-component></my-component>
+              <WidgetPreview />
             </div>
           </div>
           <div className="row">

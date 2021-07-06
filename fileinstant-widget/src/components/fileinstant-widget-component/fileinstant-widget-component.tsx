@@ -1,16 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Prop, h, State } from '@stencil/core'
-// import { format } from '../utils/utils'
+import { Component, h, State } from '@stencil/core'
 
 @Component({
-  tag: 'my-component',
-  styleUrl: 'my-component.css',
+  tag: 'fileinstant-widget-component',
+  styleUrl: 'fileinstant-widget-component.css',
   shadow: true,
 })
 
 export class MyComponent {
-
-  @Prop() icon: boolean
 
   @State() softwares: Array<any>;
 
@@ -27,7 +24,7 @@ export class MyComponent {
       <div class="widget_preview">
         <br />
         <div class="latest_download">
-          <h4>Latest downloads</h4>
+          <h4 class="new">Latest downloads</h4>
           <div class="latest_download_content">
             <ul>
               {this.softwares.map(software =>
