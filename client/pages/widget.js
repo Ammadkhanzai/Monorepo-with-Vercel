@@ -4,9 +4,9 @@ import WidgetContent from "../components/widget/WidgetContent";
 import WidgetPreview from "../components/widget/WidgetPreview";
 import WidgetState from "../context/fileinstant/widget/widgetState";
 import Head from 'next/head';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { applyPolyfills, defineCustomElements } from 'fileinstant-widget/loader';
-
+import Link from 'next/link';
 
 const Widget = () => {
 
@@ -14,7 +14,7 @@ const Widget = () => {
     applyPolyfills().then(() => {
       defineCustomElements(window)
     })
-  
+
   }, [])
 
   return (
@@ -35,6 +35,13 @@ const Widget = () => {
                   options below until the preview matches the style of your site,
                   then simply copy the HTML code.
                 </p>
+                <Link href="https://download.filecat.xyz/index.html">
+                  <a target="_blank">new 1</a>
+                </Link>
+                <Link href="https://download.filecat.xyz/test/img.jpg" >
+                  <a target="_blank">new</a>
+                </Link>
+
               </div>
             </div>
           </div>

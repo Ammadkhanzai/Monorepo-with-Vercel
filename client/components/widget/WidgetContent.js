@@ -34,7 +34,7 @@ const WidgetContent = () => {
         <h5>Widget options</h5>
         <div className='widget_fields'>
           <div className='widget_field'>
-            <label>Widget width (px):</label>
+            <label>Widget width (%):</label>
             <input
               type='number'
               className='input_widget'
@@ -53,7 +53,7 @@ const WidgetContent = () => {
               defaultChecked={showIcons}
             />
           </div>
-          <div className='widget_field'>
+          {/* <div className='widget_field'>
             <label>Date size:</label>
             <input
               type='number'
@@ -62,9 +62,9 @@ const WidgetContent = () => {
               onChange={onChange}
               value={dateSize}
             />
-          </div>
+          </div> */}
           <div className='widget_field'>
-            <label>Link size:</label>
+            <label>Link size: (rem)</label>
             <input
               type='number'
               className='input_widget'
@@ -93,7 +93,6 @@ const WidgetContent = () => {
             >
               <option value='hover'>On Hover</option>
               <option value='click'>On Click</option>
-              <option value='blur'>On Blur</option>
             </select>
           </div>
           <div className='widget_field'>
@@ -138,7 +137,7 @@ const WidgetContent = () => {
               />
             </div>
           </div>
-          <div className='widget_field'>
+          {/* <div className='widget_field'>
             <label>Date color:</label>
             <div className='color'>
               <input
@@ -158,7 +157,7 @@ const WidgetContent = () => {
                 minLength='1'
               />
             </div>
-          </div>
+          </div> */}
           <div className='widget_field'>
             <label>Link color:</label>
             <div className='color'>

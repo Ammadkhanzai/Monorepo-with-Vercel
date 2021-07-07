@@ -5,14 +5,14 @@ import WidgetReducer from "./widgetReducer";
 const WidgetState = (props) => {
   
   const initState = {
-    widgetWidth: "14",
-    showIcons: false,
+    widgetWidth: "60",
+    showIcons: true,
     dateSize: "14",
-    linkSize: "14",
+    linkSize: "1",
     lineSpacing: "14",
-    underline: "onhover",
+    underline: "hover",
     titleColor: "#FFFFFF",
-    titleBackground: "#FFFFFF",
+    titleBackground: "#0D6EFC",
     dateColor: "#FCG321",
     linkColor: "#D00000",
     borderColor: "#000000",
