@@ -4,7 +4,7 @@ import { Component, h, State } from '@stencil/core'
 @Component({
   tag: 'fileinstant-widget-component',
   styleUrl: 'fileinstant-widget-component.css',
-  shadow: true,
+  shadow: false,
 })
 
 export class MyComponent {
