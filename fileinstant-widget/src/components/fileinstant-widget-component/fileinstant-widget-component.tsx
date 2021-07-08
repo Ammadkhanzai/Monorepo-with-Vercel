@@ -4,15 +4,16 @@ import { Component, h, State } from '@stencil/core'
 @Component({
   tag: 'fileinstant-widget-component',
   styleUrl: 'fileinstant-widget-component.css',
-  shadow: false,
+  shadow: true,
 })
 
 export class MyComponent {
 
   @State() softwares: Array<any>;
 
+
   componentWillLoad() {
-    return fetch('http://api-fileinstant.herokuapp.com/api/latest-software/')
+    return fetch("http://api-fileinstant.herokuapp.com/api/latest-software/5")
       .then(response => response.json())
       .then(data => {
         this.softwares = data.data;
@@ -24,7 +25,7 @@ export class MyComponent {
       <div class="widget_preview">
         <br />
         <div class="latest_download">
-          <h4 class="new">Latest downloads</h4>
+          <h4>Latest downloads</h4>
           <div class="latest_download_content">
             <ul>
               {this.softwares.map(software =>
@@ -37,9 +38,9 @@ export class MyComponent {
                   <a href={`https://proxy-omega.vercel.app/download/${software.softwareID.softwareName.trim().split(" ").join("-").toLowerCase()}/${software.softwareID._id.toString()}`}>{software.softwareID.softwareName + " " + software.softwareID.softwareVersion}</a>
                 </li>
               )}
-              <li>Powered by Fieinstant</li>
             </ul>
           </div>
+          <div class="new">Powered by Fieinstant</div>
         </div>
       </div>
     )

@@ -1,30 +1,25 @@
-
 * {
   margin: 0;
   padding: 0;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .widget_preview {
+  max-height: 30%;
   padding: 20px;
-  width: 40%;
+  width: var(--widget-width, 40%);
+}
+.new{
+  background-color: #ffd400;
+  width: 200px;
+  position: relative;
+  bottom: 10px;
+  text-align: center;
+  padding: 2px;
+  border-radius: 10px;
 }
 .widget_preview h4 {
-  background: #0d6efd;
-  /* color: #fff !important; */
+  background: var(--title-background, #0d6efd);
+  color: var(--tilte-color, #ffffff);
   padding: 6px 10px;
   border-radius: 5px 5px 0px 0px;
   box-shadow: 0px 0px 2px 0px #000;
@@ -33,34 +28,37 @@ code {
   font-weight: 500;
 }
 
-.new {
-  color: var(--primary-color, #0c0c0c);
-}
-
 .latest_download_content {
-  border-radius: 5px;
+  border: var(--list-border);
+  border-radius: var(--list-border-radius, 2px);
   box-shadow: 0px 0px 2px 0px #000;
 }
 .latest_download_content ul {
   background: #eeeeee;
   padding: 10px 10px;
+  line-height: var(--software-list-spacing);
 }
 .latest_download_content ul li {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
-.latest_download_content ul li:last-child {
-  justify-content: flex-end;
-  margin-bottom: 0;
-}
+
 .latest_download_content ul li img {
   width: 30px;
   height: 30px;
   margin-right: 10px;
+  visibility: var(--show-icon);
 }
 .latest_download_content ul li a {
-  color: #000;
+  color: var(--software-name-color, "#000");
+  font-size: var(--software-name-size, 1rem);
+}
+.latest_download_content ul li a:hover {
+  text-decoration: var(--underline-onhover, none);
+}
+.latest_download_content ul li a:focus {
+  text-decoration: var(--underline-focus, none);
 }
 .widget_code_area h4 {
   color: var(--blue);
@@ -74,6 +72,9 @@ code {
 }
 .widget_code::-webkit-scrollbar {
   width: 10px;
+}
+a {
+  text-decoration: none;
 }
 
 /* Track */
@@ -94,10 +95,5 @@ code {
 .widget-add {
   width: 80%;
   margin: 20px auto;
-}
-/* === END HERE === */
-
-a {
-  text-decoration: none;
 }
 /* === END HERE === */

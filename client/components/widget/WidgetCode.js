@@ -84,6 +84,8 @@ const WidgetCode = () => {
           <br />
           {`<script nomodule src=".js"></script>`}
           <br />
+          {`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">`}
+          <br />
           <br />
           {`<!-- End Fileinstant Feed -->`}
         </span>
