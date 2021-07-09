@@ -45,7 +45,7 @@ const WidgetCode = () => {
           {`<!-- Fileinstant Feed -->`}
           <br />
           {`<style type="text/css">`}
-          <br /><br/>
+          <br />
           {`:root { `}
           <br/>
           {titleColor && ` --tilte-color: ${titleColor};`}
@@ -53,6 +53,12 @@ const WidgetCode = () => {
           {titleBackground && ` --title-background: ${titleBackground};`}
           <br/>
           {widgetWidth && ` --widget-width: ${widgetWidth}%;`}
+          <br/>
+          {linkColor && ` --software-name-color: ${linkColor};`}
+          <br/>
+          {linkSize && ` --software-name-size: ${linkSize}px;`}
+          <br/>
+          {lineSpacing && ` --software-list-spacing: ${lineSpacing};`}
           <br/>
           {borderColor && ` --list-border: 1px solid ${borderColor};`}
           <br/>
@@ -67,13 +73,8 @@ const WidgetCode = () => {
             }
           })()}
           <br/>
-          {linkColor && ` --software-name-color: ${linkColor};`}
-          <br/>
-          {linkSize && ` --software-name-size: ${linkSize}px;`}
-          <br/>
-          {lineSpacing && ` --software-list-spacing: ${lineSpacing};`}
-          <br/>
           {showIcons ? "" : " --show-icon: hidden;"}
+          <br/>
           {` }`}
           <br />
           {`</style>`}

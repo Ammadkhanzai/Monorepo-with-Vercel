@@ -5,17 +5,17 @@ import WidgetReducer from "./widgetReducer";
 const WidgetState = (props) => {
   
   const initState = {
-    widgetWidth: "",
+    widgetWidth: "70",
     showIcons: true,
     dateSize: "",
-    linkSize: "",
-    lineSpacing: "",
+    linkSize: "16",
+    lineSpacing: "1",
     underline: "",
-    titleColor: "",
-    titleBackground: "",
+    titleColor: "#ffffff",
+    titleBackground: "#0d6efd",
     dateColor: "",
-    linkColor: "",
-    borderColor: "",
+    linkColor: "#000000",
+    borderColor: "#FAFAFA",
     roundedCorners: false ,
     roundedCornersSize: "",
   };
