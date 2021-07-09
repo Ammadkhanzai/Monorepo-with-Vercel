@@ -35,13 +35,6 @@ const Widget = () => {
                   options below until the preview matches the style of your site,
                   then simply copy the HTML code.
                 </p>
-                <Link href="https://download.filecat.xyz/index.html">
-                  <a target="_blank">new 1</a>
-                </Link>
-                <Link href="https://download.filecat.xyz/test/img.jpg" >
-                  <a target="_blank">new</a>
-                </Link>
-
               </div>
             </div>
           </div>
