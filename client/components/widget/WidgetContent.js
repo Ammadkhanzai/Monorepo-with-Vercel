@@ -27,7 +27,7 @@ const WidgetContent = () => {
   const onChange = (e) => fieldChange(e.target.name, e.target.value);
   const onCheck = (e) =>
     checkboxChange(e.target.name, e.target.checked ? true : false);
-  
+
   return (
     <div className='widget_content'>
       <div className='widget_option'>
@@ -41,6 +41,7 @@ const WidgetContent = () => {
               name='widgetWidth'
               onChange={onChange}
               value={widgetWidth}
+
             />
           </div>
           <div className='widget_field'>
@@ -64,7 +65,7 @@ const WidgetContent = () => {
             />
           </div> */}
           <div className='widget_field'>
-            <label>Link size: (rem)</label>
+            <label>Link size: (px)</label>
             <input
               type='number'
               className='input_widget'
@@ -91,8 +92,10 @@ const WidgetContent = () => {
               onChange={onChange}
               value={underline}
             >
+              <option value=''>No</option>
               <option value='hover'>On Hover</option>
               <option value='click'>On Click</option>
+
             </select>
           </div>
           <div className='widget_field'>
@@ -104,15 +107,14 @@ const WidgetContent = () => {
                 name='titleColor'
                 onChange={onChange}
                 value={titleColor}
-                maxLength='7'
+
               />
               <input
                 type='color'
                 name='titleColor'
                 onChange={onChange}
                 value={titleColor}
-                maxLength='7'
-                minLength='1'
+
               />
             </div>
           </div>
@@ -125,15 +127,14 @@ const WidgetContent = () => {
                 name='titleBackground'
                 onChange={onChange}
                 value={titleBackground}
-                maxLength='7'
+
               />
               <input
                 type='color'
                 name='titleBackground'
                 onChange={onChange}
                 value={titleBackground}
-                maxLength='7'
-                minLength='1'
+
               />
             </div>
           </div>
@@ -167,15 +168,14 @@ const WidgetContent = () => {
                 name='linkColor'
                 onChange={onChange}
                 value={linkColor}
-                maxLength='7'
+
               />
               <input
                 type='color'
                 name='linkColor'
                 onChange={onChange}
                 value={linkColor}
-                maxLength='7'
-                minLength='1'
+
               />
             </div>
           </div>
@@ -188,15 +188,14 @@ const WidgetContent = () => {
                 name='borderColor'
                 onChange={onChange}
                 value={borderColor}
-                maxLength='7'
+
               />
               <input
                 type='color'
                 name='borderColor'
                 onChange={onChange}
                 value={borderColor}
-                maxLength='7'
-                minLength='1'
+
               />
             </div>
           </div>
@@ -209,15 +208,14 @@ const WidgetContent = () => {
                 name='roundedCorners'
                 onChange={onCheck}
                 defaultChecked={roundedCorners}
-                maxLength='7'
+
               />
               <input
                 type='number'
                 name='roundedCornersSize'
                 onChange={onChange}
                 value={roundedCornersSize}
-                maxLength='7'
-                minLength='1'
+
               />
             </div>
           </div>

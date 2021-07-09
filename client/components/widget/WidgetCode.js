@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import widgetContext from "../../context/fileinstant/widget/widgetContext";
 
 const WidgetCode = () => {
@@ -20,6 +20,22 @@ const WidgetCode = () => {
   } = WidgetContext;
 
 
+  useEffect(() => {
+    var root = document.querySelector(':root');
+    root.style.setProperty('--tilte-color', titleColor);
+    root.style.setProperty('--title-background', titleBackground);
+    root.style.setProperty('--widget-width', widgetWidth + "%");
+    root.style.setProperty('--list-border', `${borderColor && "1px solid " + borderColor}`);
+    root.style.setProperty('--list-border-radius', roundedCornersSize + "px");
+    root.style.setProperty('--underline-focus', `${underline == 'click' ? 'underline' : ''}`);
+    root.style.setProperty('--underline-onhover', `${underline == 'hover' ? 'underline' : ''}`);
+    root.style.setProperty('--software-name-color', linkColor);
+    root.style.setProperty('--software-name-size', linkSize + "px");
+    root.style.setProperty('--software-list-spacing', lineSpacing);
+    root.style.setProperty('--show-icon', `${showIcons ? "" : "hidden"}`);
+  }, [WidgetContext])
+
+
   return (
     <div className='widget_code_area'>
       <h4>Widget code</h4>
@@ -28,52 +44,37 @@ const WidgetCode = () => {
         <span>
           {`<!-- Fileinstant Feed -->`}
           <br />
-          <br />
           {`<style type="text/css">`}
-          <br />
-          {`
-            .widget_preview h4 {
-              color:${titleColor};
-              background-color:${titleBackground};
+          <br /><br/>
+          {`:root { `}
+          <br/>
+          {titleColor && ` --tilte-color: ${titleColor};`}
+          <br/>
+          {titleBackground && ` --title-background: ${titleBackground};`}
+          <br/>
+          {widgetWidth && ` --widget-width: ${widgetWidth}%;`}
+          <br/>
+          {borderColor && ` --list-border: 1px solid ${borderColor};`}
+          <br/>
+          {roundedCorners && roundedCornersSize ? ` --list-border-radius: ${roundedCornersSize}px;` : ""}
+          <br/>
+          {underline && (() => {
+            if (underline === "click") {
+              return ` --underline-focus: underline;`
             }
-          `}
-          <br />
-          {`
-            .widget_preview {
-              width:${widgetWidth}%;
+            if (underline === "hover") {
+              return ` --underline-onhover: underline;`
             }
-          `}
-          <br />
-          {`
-            .latest_download_content {
-              border:solid 1px ${borderColor};
-              ${roundedCorners ? `border-radius:${roundedCornersSize}px;` : ""}
-            } 
-          `}
-          <br />
-          {(() => {
-            let onWhich = "hover";
-            // eslint-disable-next-line
-            switch (underline) {
-              case "click":
-                onWhich = "focus";
-                break;
-              case "hover":
-                onWhich = "hover";
-                break;
-            }
-            return `
-              .latest_download_content ul li a:${onWhich} {
-                text-decoration:underline;
-              }
-              `;
           })()}
-          <br />
-          {`.latest_download_content ul li a { color:${linkColor}; font-size:${linkSize}rem }`}
-          <br />
-          {`.latest_download_content ul { line-height:${lineSpacing}; }`}
-          <br />
-          {`.latest_download_content ul li img { visibility:${showIcons ? 'visible' : 'hidden'}; }`}
+          <br/>
+          {linkColor && ` --software-name-color: ${linkColor};`}
+          <br/>
+          {linkSize && ` --software-name-size: ${linkSize}px;`}
+          <br/>
+          {lineSpacing && ` --software-list-spacing: ${lineSpacing};`}
+          <br/>
+          {showIcons ? "" : " --show-icon: hidden;"}
+          {` }`}
           <br />
           {`</style>`}
           <br />
@@ -86,8 +87,8 @@ const WidgetCode = () => {
           <br />
           {`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">`}
           <br />
-          <br />
           {`<!-- End Fileinstant Feed -->`}
+
         </span>
       </div>
       <div className='widget-add'>

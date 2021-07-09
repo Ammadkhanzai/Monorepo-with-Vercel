@@ -5,19 +5,19 @@ import WidgetReducer from "./widgetReducer";
 const WidgetState = (props) => {
   
   const initState = {
-    widgetWidth: "60",
+    widgetWidth: "",
     showIcons: true,
-    dateSize: "14",
-    linkSize: "1",
-    lineSpacing: "14",
-    underline: "hover",
-    titleColor: "#FFFFFF",
-    titleBackground: "#0D6EFC",
-    dateColor: "#FCG321",
-    linkColor: "#D00000",
-    borderColor: "#000000",
+    dateSize: "",
+    linkSize: "",
+    lineSpacing: "",
+    underline: "",
+    titleColor: "",
+    titleBackground: "",
+    dateColor: "",
+    linkColor: "",
+    borderColor: "",
     roundedCorners: false ,
-    roundedCornersSize: "14",
+    roundedCornersSize: "",
   };
 
   const [state, dispatch] = useReducer(WidgetReducer, initState);
