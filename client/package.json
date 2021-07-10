@@ -21,6 +21,6 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-scripts": "4.0.1",
     "react-share": "^4.4.0",
-    "fileinstant-widget":"0.0.1"
+    "fileinstant-widget": "1.0.0"
   }
 }
