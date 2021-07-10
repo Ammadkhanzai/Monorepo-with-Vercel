@@ -82,9 +82,9 @@ const WidgetCode = () => {
           <br />
           {`<fileinstant-widget-component></fileinstant-widget-component>`}
           <br />
-          {`<script type="module"  src=".esm.js"></script>`}
+          {`<script type="module"  src="https://cdn.jsdelivr.net/npm/fileinstant-widget@1.0.0/dist/fileinstant-widget/fileinstant-widget.esm.js"></script>`}
           <br />
-          {`<script nomodule src=".js"></script>`}
+          {`<script nomodule src="https://cdn.jsdelivr.net/npm/fileinstant-widget@1.0.0/dist/fileinstant-widget/fileinstant-widget.js"></script>`}
           <br />
           {`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">`}
           <br />
