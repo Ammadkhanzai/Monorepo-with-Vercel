@@ -26,8 +26,7 @@ export default function index({ software, oldSoftware }) {
 
         <meta property="og:title" content={software.response.softwareName} />
         <meta property="og:description" content={software.response.softwareDescription.slice(0, 200)} />
-        <meta property="og:image" content={`https://proxy-omega.vercel.app/add2.PNG`} />
-        <meta property="og:image:type" content="image/png"/>
+        <meta property="og:image" content={`${process.env.REACT_APP_API_URL}/uploads/${software.response.softwareIcon}`} />
 
         <meta property="og:site_name" content="Fileinstant" />
         <meta property="og:url" content={`https://fileinstant.com/download/${params[0]}/${params[1]}`} />
