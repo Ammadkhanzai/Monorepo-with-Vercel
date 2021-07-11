@@ -20,7 +20,7 @@
     "react-icons": "^4.2.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-scripts": "4.0.1",
-    "react-share": "3.0.1",
+    "react-share": "^4.4.0",
     "fileinstant-widget": "1.0.0"
   }
 }
