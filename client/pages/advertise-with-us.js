@@ -23,6 +23,24 @@ export default function index() {
       <Head>
         <title>Advertise | Fileinstant</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="fileinstant" />
+        <meta name="keywords" content="fileinstant" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:title" content="Advertise | Fileinstant" />
+        <meta property="og:description" content="" />
+        <meta property="og:image" content="https://proxy-omega.vercel.app/logo.png" />
+
+        <meta property="og:site_name" content="Fileinstant" />
+        <meta property="og:url" content="" />
+        <meta property="og:type" content="article" />
+        <meta property="article:publisher" content="https://fileinstant.com/" />
+
+        <meta property="og:image:width" content="1280" />
+        <meta property="og:image:height" content="640" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:image" content="https://proxy-omega.vercel.app/logo.png" />
+        <meta property="twitter:site" content="@fileinstant" />
       </Head>
       <div className="advertise_us">
         <h2>Advertise With Us</h2>

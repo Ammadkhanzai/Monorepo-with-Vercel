@@ -13,7 +13,26 @@ export default function Home({ info }) {
       <Head>
         <title>Tech News | Fileinstant</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="fileinstant" />
+        <meta name="keywords" content="fileinstant" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:title" content="Tech News | Fileinstant" />
+        <meta property="og:description" content="" />
+        <meta property="og:image" content="" />
+
+        <meta property="og:site_name" content="Fileinstant" />
+        <meta property="og:url" content="https://proxy-omega.vercel.app/logo.png" />
+        <meta property="og:type" content="article" />
+        <meta property="article:publisher" content="https://fileinstant.com/" />
+
+        <meta property="og:image:width" content="1280" />
+        <meta property="og:image:height" content="640" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:image" content="https://proxy-omega.vercel.app/logo.png" />
+        <meta property="twitter:site" content="@fileinstant" />
       </Head>
+      
       <div className="about_us">
         <div className="row">
           <div className="col-12">
