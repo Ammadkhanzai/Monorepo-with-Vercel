@@ -12,11 +12,13 @@ import {
   LinkedinIcon,
   EmailIcon,
 } from "react-share";
+import { useRouter } from 'next/router'
 
 
 const DownloadShare = () => {
-  // console.log(window.location.href)
-  const url = "https://fileinstant.herokuapp.com/download/firefox/60939c34f56eaa2be005ef4f"
+  const router = useRouter()
+  const url = `https://proxy-omega.vercel.app/${router.asPath}`
+  // console.log(router.basePath)
   return (
     <div className="download_details" >
       <h5>Share</h5>
